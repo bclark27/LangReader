@@ -1,20 +1,31 @@
 #!/usr/bin/env python3
 """
-Chinese Reader - a simple local app for reading Chinese text against a
-personal vocabulary dictionary.
+Language Reader - a simple local app for reading foreign-language text
+against your own personal vocabulary dictionary. Works for any language
+(Chinese, Korean, etc.) - just keep a separate dictionary file per
+language and switch between them from the File menu.
 
 Left panel:  shows notes for whatever word you click on in the reader,
              editable and savable.
-Right panel: paste text to read; any word that exists in your dictionary
-             gets highlighted (longest-match, no NLP/segmentation - you
-             build the vocabulary list yourself); click a highlighted word
-             to see/edit its notes on the left; also lets you add brand
-             new words straight into the dictionary.
+Right panel: paste text to read; any word that exists in the currently
+             open dictionary gets highlighted (longest-match, no NLP /
+             segmentation - you build the vocabulary list yourself);
+             click a highlighted word to see/edit its notes on the left;
+             also lets you add brand new words straight into the
+             dictionary.
 
-Dictionary format (dictionary.json, sits next to this script) - a flat
-word -> {notes, level} mapping, still human readable / hand-editable.
-`level` is your familiarity with the word, 1 (barely know it) to 5
-(mastered) - it controls the highlight color in the reader (red -> green):
+Use the File menu to open a different dictionary file (e.g. one for
+Chinese, one for Korean) or create a new one. Whichever file is open
+stays open for the rest of the session - paste text, click words, add
+words, all read/write to that same file until you switch again. The app
+also remembers the last dictionary you had open and reopens it
+automatically next time, so a typical session is just: launch app, paste
+text, study.
+
+Dictionary file format (a plain JSON file, human readable / hand
+editable) - a flat word -> {notes, level} mapping. `level` is your
+familiarity with the word, 1 (barely know it) to 5 (mastered) - it
+controls the highlight color in the reader (red -> green):
 
 {
     "你好": {"notes": "hello / hi - common greeting", "level": 5},
@@ -34,9 +45,13 @@ import os
 import tkinter as tk
 from tkinter import font as tkfont
 from tkinter import messagebox
+from tkinter import filedialog
 from tkinter import ttk
 
-DICT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dictionary.json")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DEFAULT_DICT_PATH = os.path.join(SCRIPT_DIR, "dictionary.json")
+CONFIG_PATH = os.path.join(SCRIPT_DIR, "reader_config.json")
+MAX_RECENT = 8
 
 DEFAULT_DICTIONARY = {
     "你好": {"notes": "hello / hi - common greeting", "level": 3},
@@ -61,15 +76,23 @@ LEVEL_COLORS = {
 def level_color(level):
     return LEVEL_COLORS.get(level, LEVEL_COLORS[DEFAULT_LEVEL])
 
-# Fonts that reliably render Chinese characters, checked in order.
+# Fonts that reliably render CJK / Hangul characters, checked in order.
+# Noto Sans CJK is a unified Pan-CJK family and covers Hangul too, but a
+# few Korean-specific fonts are listed as extra fallbacks.
 CJK_FONT_CANDIDATES = [
     "Noto Sans CJK SC",
     "Noto Sans CJK TC",
+    "Noto Sans CJK KR",
     "Microsoft YaHei",
+    "Malgun Gothic",
     "PingFang SC",
     "PingFang TC",
+    "Apple SD Gothic Neo",
+    "AppleGothic",
     "STHeiti",
     "SimHei",
+    "NanumGothic",
+    "Noto Sans KR",
     "Arial Unicode MS",
     "WenQuanYi Zen Hei",
 ]
@@ -98,51 +121,191 @@ def _normalize_entry(value):
     return {"notes": "", "level": DEFAULT_LEVEL}
 
 
-def load_dictionary():
-    if not os.path.exists(DICT_PATH):
-        with open(DICT_PATH, "w", encoding="utf-8") as f:
-            json.dump(DEFAULT_DICTIONARY, f, ensure_ascii=False, indent=2, sort_keys=True)
-        return {k: dict(v) for k, v in DEFAULT_DICTIONARY.items()}
+def load_dictionary(path, default_content=None):
+    """Loads the dictionary at `path`. If the file doesn't exist yet, it's
+    created with `default_content` (or empty if not given). Old-format
+    (word -> plain string) entries are transparently upgraded. Returns
+    None (after showing an error dialog) if the file exists but can't be
+    parsed, or can't be created - callers should treat None as "the
+    switch failed, keep whatever was open before"."""
+    if not os.path.exists(path):
+        content = default_content if default_content is not None else {}
+        try:
+            with open(path, "w", encoding="utf-8") as f:
+                json.dump(content, f, ensure_ascii=False, indent=2, sort_keys=True)
+        except Exception as e:
+            messagebox.showerror("Could not create dictionary", f"Could not create {path}:\n{e}")
+            return None
+        return {word: _normalize_entry(value) for word, value in content.items()}
     try:
-        with open(DICT_PATH, "r", encoding="utf-8") as f:
+        with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
         if not isinstance(data, dict):
-            raise ValueError("dictionary.json must contain a JSON object of word -> entry")
-        # Transparently upgrades entries saved by the older word->string
-        # format, so existing dictionary.json files keep working.
+            raise ValueError("dictionary file must contain a JSON object of word -> entry")
         return {word: _normalize_entry(value) for word, value in data.items()}
     except Exception as e:
-        messagebox.showerror("Dictionary load error", f"Could not read {DICT_PATH}:\n{e}")
-        return {}
+        messagebox.showerror("Dictionary load error", f"Could not read {path}:\n{e}")
+        return None
 
 
-def save_dictionary(dictionary):
+def save_dictionary(dictionary, path):
     """Returns True on success. Shows an error dialog and returns False on
     failure instead of failing silently (e.g. bad file permissions)."""
     try:
-        with open(DICT_PATH, "w", encoding="utf-8") as f:
+        with open(path, "w", encoding="utf-8") as f:
             json.dump(dictionary, f, ensure_ascii=False, indent=2, sort_keys=True)
         return True
     except Exception as e:
-        messagebox.showerror("Save failed", f"Could not write {DICT_PATH}:\n{e}")
+        messagebox.showerror("Save failed", f"Could not write {path}:\n{e}")
         return False
+
+
+# ------------------------------------------------------ session config --
+# A tiny local file (next to this script) that just remembers which
+# dictionary file you had open last, plus a short recent-files list, so
+# reopening the app drops you back into the same language session.
+
+def load_config():
+    try:
+        with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            if isinstance(data, dict):
+                return data
+    except Exception:
+        pass
+    return {}
+
+
+def save_config(config):
+    try:
+        with open(CONFIG_PATH, "w", encoding="utf-8") as f:
+            json.dump(config, f, ensure_ascii=False, indent=2)
+    except Exception:
+        pass  # remembering the last file is a nicety, not worth crashing over
+
+
+def remember_dict_path(path):
+    config = load_config()
+    config["last_dictionary_path"] = path
+    recent = [p for p in config.get("recent", []) if p != path]
+    recent.insert(0, path)
+    config["recent"] = recent[:MAX_RECENT]
+    save_config(config)
+
+
+def resolve_startup_dict_path():
+    """Decide which dictionary file to open on launch: the last one used,
+    if it's still there, otherwise the bundled default (created with a
+    few sample words the very first time the app is ever run)."""
+    config = load_config()
+    last = config.get("last_dictionary_path")
+    if last:
+        if os.path.exists(last):
+            return last, None
+        return DEFAULT_DICT_PATH, last  # remembered path is gone - fall back, and warn
+    return DEFAULT_DICT_PATH, None
 
 
 class ChineseReaderApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Chinese Reader")
         self.root.geometry("1200x750")
 
-        self.dictionary = load_dictionary()
+        startup_path, missing_path = resolve_startup_dict_path()
+        if missing_path:
+            messagebox.showwarning(
+                "Dictionary not found",
+                f"Couldn't find the last dictionary file you had open:\n{missing_path}\n\n"
+                "Opening the default dictionary instead. Use File > Open Dictionary...\n"
+                "to point back at it if it's just been moved or renamed.",
+            )
+        default_content = DEFAULT_DICTIONARY if startup_path == DEFAULT_DICT_PATH else None
+        result = load_dictionary(startup_path, default_content=default_content)
+        self.dict_path = startup_path
+        self.dictionary = result if result is not None else {}
+        print(f"[chinese_reader] dictionary file: {self.dict_path}")
+        remember_dict_path(self.dict_path)
+
         self.current_word = None
         self.cjk_font_name = pick_cjk_font()
 
         self.reader_font = tkfont.Font(family=self.cjk_font_name, size=18)
         self.notes_font = tkfont.Font(family=self.cjk_font_name, size=14)
 
+        self._build_menu()
         self._build_ui()
+        self._update_window_title()
         self.highlight_text()
+
+    # -------------------------------------------------------- menu bar --
+    def _build_menu(self):
+        menubar = tk.Menu(self.root)
+        file_menu = tk.Menu(menubar, tearoff=0)
+        file_menu.add_command(label="Open Dictionary...", command=self.open_dictionary_dialog)
+        file_menu.add_command(label="New Dictionary...", command=self.new_dictionary_dialog)
+        self.recent_menu = tk.Menu(file_menu, tearoff=0)
+        file_menu.add_cascade(label="Open Recent", menu=self.recent_menu)
+        file_menu.add_separator()
+        file_menu.add_command(label="Quit", command=self.root.quit)
+        menubar.add_cascade(label="File", menu=file_menu)
+        self.root.config(menu=menubar)
+        self._rebuild_recent_menu()
+
+    def _rebuild_recent_menu(self):
+        self.recent_menu.delete(0, "end")
+        recent = [p for p in load_config().get("recent", []) if p != self.dict_path]
+        if not recent:
+            self.recent_menu.add_command(label="(no other recent files)", state=tk.DISABLED)
+            return
+        for p in recent:
+            self.recent_menu.add_command(label=os.path.basename(p), command=lambda p=p: self.switch_dictionary(p))
+
+    def open_dictionary_dialog(self):
+        path = filedialog.askopenfilename(
+            title="Open dictionary file",
+            initialdir=os.path.dirname(self.dict_path) or SCRIPT_DIR,
+            filetypes=[("JSON files", "*.json"), ("All files", "*.*")],
+        )
+        if not path:
+            return
+        self.switch_dictionary(path)
+
+    def new_dictionary_dialog(self):
+        path = filedialog.asksaveasfilename(
+            title="Create new dictionary file (e.g. korean.json)",
+            initialdir=os.path.dirname(self.dict_path) or SCRIPT_DIR,
+            defaultextension=".json",
+            filetypes=[("JSON files", "*.json")],
+        )
+        if not path:
+            return
+        self.switch_dictionary(path, default_content={})
+
+    def switch_dictionary(self, path, default_content=None):
+        result = load_dictionary(path, default_content=default_content)
+        if result is None:
+            return False  # error already shown by load_dictionary; keep current file open
+        self.dictionary = result
+        self.dict_path = path
+        self.current_word = None
+        self.word_label.config(text="(click a highlighted word)")
+        self.notes_text.delete("1.0", "end")
+        self.level_combo.config(state="disabled")
+        self.level_var.set(str(DEFAULT_LEVEL))
+        self.save_btn.config(state=tk.DISABLED)
+        self.delete_btn.config(state=tk.DISABLED)
+        self._update_dict_count()
+        self._update_path_label()
+        self._update_top_label()
+        self._update_window_title()
+        self.highlight_text()
+        remember_dict_path(path)
+        self._rebuild_recent_menu()
+        print(f"[chinese_reader] switched to dictionary file: {path} ({len(self.dictionary)} words)")
+        return True
+
+    def _update_window_title(self):
+        self.root.title(f"Language Reader - {os.path.basename(self.dict_path)}")
 
     # ---------------------------------------------------------------- UI --
     def _build_ui(self):
@@ -194,16 +357,20 @@ class ChineseReaderApp:
         self.dict_count_label.pack(anchor="w", pady=(20, 0))
         self._update_dict_count()
 
-        tk.Label(
-            parent, text=f"file: {DICT_PATH}", fg="#888",
+        self.path_label = tk.Label(
+            parent, text="", fg="#888",
             font=(None, 8), wraplength=320, justify="left",
-        ).pack(anchor="w", pady=(2, 0))
+        )
+        self.path_label.pack(anchor="w", pady=(2, 0))
+        self._update_path_label()
 
     def _build_right_panel(self, parent):
         top_row = tk.Frame(parent)
         top_row.pack(fill=tk.X, side=tk.TOP)
-        tk.Label(top_row, text="Paste text to read", font=(None, 11, "bold")).pack(side=tk.LEFT)
+        self.top_label = tk.Label(top_row, text="", font=(None, 11, "bold"))
+        self.top_label.pack(side=tk.LEFT)
         tk.Button(top_row, text="Highlight / Refresh", command=self.highlight_text).pack(side=tk.RIGHT)
+        self._update_top_label()
 
         legend = tk.Frame(parent)
         legend.pack(fill=tk.X, side=tk.TOP, pady=(4, 0))
@@ -255,7 +422,13 @@ class ChineseReaderApp:
 
     # ----------------------------------------------------------- helpers --
     def _update_dict_count(self):
-        self.dict_count_label.config(text=f"{len(self.dictionary)} words in dictionary.json")
+        self.dict_count_label.config(text=f"{len(self.dictionary)} words in {os.path.basename(self.dict_path)}")
+
+    def _update_path_label(self):
+        self.path_label.config(text=f"file: {self.dict_path}")
+
+    def _update_top_label(self):
+        self.top_label.config(text=f"Paste text to read  \u2014  {os.path.basename(self.dict_path)}")
 
     def _flash_status(self, label, text, ms=4000):
         label.config(text=text, wraplength=420, justify="left")
@@ -331,7 +504,7 @@ class ChineseReaderApp:
         if level not in LEVELS:
             level = DEFAULT_LEVEL
         self.dictionary[self.current_word] = {"notes": notes, "level": level}
-        if save_dictionary(self.dictionary):
+        if save_dictionary(self.dictionary, self.dict_path):
             self._update_dict_count()
             self._flash_status(self.left_status, "Saved.")
             self.highlight_text()  # recolor in case the level changed
@@ -344,7 +517,7 @@ class ChineseReaderApp:
         removed_word = self.current_word
         backup_entry = self.dictionary.get(removed_word)
         self.dictionary.pop(removed_word, None)
-        if not save_dictionary(self.dictionary):
+        if not save_dictionary(self.dictionary, self.dict_path):
             self.dictionary[removed_word] = backup_entry  # roll back in-memory state
             return
         self.current_word = None
@@ -371,7 +544,7 @@ class ChineseReaderApp:
             messagebox.showwarning("Missing word", "Type a word before adding it.")
             return
         self.dictionary[word] = {"notes": notes, "level": level}
-        if not save_dictionary(self.dictionary):
+        if not save_dictionary(self.dictionary, self.dict_path):
             return
         print(f"[chinese_reader] added '{word}' (level {level}) -> dictionary now has {len(self.dictionary)} entries")
         self.new_word_entry.delete(0, "end")
@@ -386,7 +559,6 @@ class ChineseReaderApp:
 
 
 def main():
-    print(f"[chinese_reader] dictionary file: {DICT_PATH}")
     root = tk.Tk()
     ChineseReaderApp(root)
     root.mainloop()

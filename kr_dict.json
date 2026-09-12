@@ -1,0 +1,158 @@
+{
+  "간호사": {
+    "level": 1,
+    "notes": "nurse"
+  },
+  "기타": {
+    "level": 3,
+    "notes": "ect. /other"
+  },
+  "기한": {
+    "level": 1,
+    "notes": "deadline"
+  },
+  "단어": {
+    "level": 5,
+    "notes": "word"
+  },
+  "대여": {
+    "level": 1,
+    "notes": "rental"
+  },
+  "무료": {
+    "level": 4,
+    "notes": "free"
+  },
+  "문의": {
+    "level": 1,
+    "notes": "inquiry"
+  },
+  "문장": {
+    "level": 2,
+    "notes": "sentence"
+  },
+  "미리": {
+    "level": 2,
+    "notes": "beforehand, in advance"
+  },
+  "반납": {
+    "level": 2,
+    "notes": "return"
+  },
+  "발급": {
+    "level": 1,
+    "notes": "issue (to give)"
+  },
+  "방법": {
+    "level": 2,
+    "notes": "way / method"
+  },
+  "보고서": {
+    "level": 1,
+    "notes": "report"
+  },
+  "빌리다": {
+    "level": 1,
+    "notes": ""
+  },
+  "빌린 책": {
+    "level": 3,
+    "notes": "lost book"
+  },
+  "사진": {
+    "level": 5,
+    "notes": "picture"
+  },
+  "생각": {
+    "level": 5,
+    "notes": "think / thought"
+  },
+  "순서": {
+    "level": 1,
+    "notes": "my turn. sequence, order"
+  },
+  "신분": {
+    "level": 1,
+    "notes": "identification, position, rank"
+  },
+  "신분증": {
+    "level": 1,
+    "notes": "id card"
+  },
+  "신청": {
+    "level": 1,
+    "notes": "apply/request (신청하다)"
+  },
+  "안내": {
+    "level": 3,
+    "notes": "information, guidance"
+  },
+  "예약": {
+    "level": 1,
+    "notes": "reserve (예약하다)"
+  },
+  "오래": {
+    "level": 2,
+    "notes": "long time"
+  },
+  "인기": {
+    "level": 1,
+    "notes": "popular/public interest"
+  },
+  "일정": {
+    "level": 1,
+    "notes": "schedule"
+  },
+  "접수": {
+    "level": 1,
+    "notes": "reception/registration"
+  },
+  "접수처": {
+    "level": 1,
+    "notes": "recception desk / reception place"
+  },
+  "제출": {
+    "level": 1,
+    "notes": "submission/turn in"
+  },
+  "증": {
+    "level": 2,
+    "notes": "hanja for form/paper"
+  },
+  "지난주": {
+    "level": 3,
+    "notes": "last week"
+  },
+  "직원": {
+    "level": 1,
+    "notes": "employee"
+  },
+  "진료": {
+    "level": 1,
+    "notes": "medical treatment, see a doctor"
+  },
+  "진료실": {
+    "level": 2,
+    "notes": "medical room, doctors office"
+  },
+  "처리": {
+    "level": 1,
+    "notes": "handeling, dispose"
+  },
+  "추천": {
+    "level": 1,
+    "notes": "suggestion"
+  },
+  "친절": {
+    "level": 1,
+    "notes": "kindness"
+  },
+  "확인": {
+    "level": 4,
+    "notes": "check, search"
+  },
+  "훨씬": {
+    "level": 3,
+    "notes": "more, far more"
+  }
+}

@@ -7,9 +7,21 @@
     "level": 5,
     "notes": "one thing"
   },
+  "上午": {
+    "level": 2,
+    "notes": "Shàngwǔ - morning"
+  },
+  "下午": {
+    "level": 2,
+    "notes": "Xiàwǔ - afternoon"
+  },
   "不": {
     "level": 5,
     "notes": "not"
+  },
+  "中午": {
+    "level": 3,
+    "notes": "zhong wǔ - mid day"
   },
   "书": {
     "level": 4,
@@ -22,6 +34,10 @@
   "什么": {
     "level": 5,
     "notes": "shén me - what"
+  },
+  "今天": {
+    "level": 5,
+    "notes": "jin tian - today"
   },
   "你": {
     "level": 5,
@@ -39,17 +55,37 @@
     "level": 3,
     "notes": "goodbye"
   },
+  "去": {
+    "level": 4,
+    "notes": "qu - go"
+  },
+  "叫": {
+    "level": 3,
+    "notes": "Jiào - to be called (what are you called)"
+  },
   "可以": {
     "level": 2,
     "notes": "kěyǐ - can / ability"
+  },
+  "吃": {
+    "level": 4,
+    "notes": "Chī - eat"
   },
   "听": {
     "level": 1,
     "notes": "tīng - to listen / to hear"
   },
+  "哪里": {
+    "level": 4,
+    "notes": "na li - where"
+  },
   "喜欢": {
     "level": 4,
     "notes": "xǐ huan - like, enjoy"
+  },
+  "在": {
+    "level": 5,
+    "notes": "zài - at / in"
   },
   "坚持": {
     "level": 1,
@@ -74,6 +110,10 @@
   "实用": {
     "level": 1,
     "notes": "Shí yòng - practical"
+  },
+  "家": {
+    "level": 4,
+    "notes": "Jiā - house"
   },
   "对了": {
     "level": 1,
@@ -159,6 +199,10 @@
     "level": 2,
     "notes": "ài hào - to like / interest / hobby / to take pleasure in / keen on / fond of / appetite for"
   },
+  "现在": {
+    "level": 4,
+    "notes": "Xiànzài - now"
+  },
   "生活": {
     "level": 1,
     "notes": "shēng huó - life / activity / to live / livelihood"
@@ -234,5 +278,9 @@
   "除了": {
     "level": 1,
     "notes": "chú le - besides / apart from (... also...)"
+  },
+  "饭": {
+    "level": 3,
+    "notes": "Fàn - food / meal"
   }
 }
