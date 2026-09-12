@@ -19,6 +19,14 @@
     "level": 1,
     "notes": "rental"
   },
+  "도서": {
+    "level": 3,
+    "notes": "book"
+  },
+  "도서관": {
+    "level": 5,
+    "notes": "library"
+  },
   "무료": {
     "level": 4,
     "notes": "free"
@@ -90,6 +98,10 @@
   "예약": {
     "level": 1,
     "notes": "reserve (예약하다)"
+  },
+  "오늘": {
+    "level": 3,
+    "notes": "today"
   },
   "오래": {
     "level": 2,
