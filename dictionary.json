@@ -1,0 +1,238 @@
+{
+  "一": {
+    "level": 3,
+    "notes": "one"
+  },
+  "一个": {
+    "level": 5,
+    "notes": "one thing"
+  },
+  "不": {
+    "level": 5,
+    "notes": "not"
+  },
+  "书": {
+    "level": 4,
+    "notes": "book"
+  },
+  "了": {
+    "level": 2,
+    "notes": "le - last tense"
+  },
+  "什么": {
+    "level": 5,
+    "notes": "shén me - what"
+  },
+  "你": {
+    "level": 5,
+    "notes": "you"
+  },
+  "你好": {
+    "level": 3,
+    "notes": "hello / hi - common greeting"
+  },
+  "做": {
+    "level": 3,
+    "notes": "zuò - to do / to make"
+  },
+  "再见": {
+    "level": 3,
+    "notes": "goodbye"
+  },
+  "可以": {
+    "level": 2,
+    "notes": "kěyǐ - can / ability"
+  },
+  "听": {
+    "level": 1,
+    "notes": "tīng - to listen / to hear"
+  },
+  "喜欢": {
+    "level": 4,
+    "notes": "xǐ huan - like, enjoy"
+  },
+  "坚持": {
+    "level": 1,
+    "notes": "jiān chí - to persevere with / to persist in / to insist on"
+  },
+  "多": {
+    "level": 2,
+    "notes": "duō - more / much"
+  },
+  "好": {
+    "level": 5,
+    "notes": "good"
+  },
+  "学": {
+    "level": 4,
+    "notes": "xué - study/learn"
+  },
+  "学习": {
+    "level": 2,
+    "notes": "xué xí - study"
+  },
+  "实用": {
+    "level": 1,
+    "notes": "Shí yòng - practical"
+  },
+  "对了": {
+    "level": 1,
+    "notes": "duì le - oh by the way"
+  },
+  "对话": {
+    "level": 1,
+    "notes": "Duì huà - dialogue"
+  },
+  "小时": {
+    "level": 2,
+    "notes": "xiǎo shí - hour"
+  },
+  "就": {
+    "level": 1,
+    "notes": "jiù - at once / right away / only / just (emphasis)"
+  },
+  "工作": {
+    "level": 3,
+    "notes": "gōng zuò - work"
+  },
+  "平时": {
+    "level": 1,
+    "notes": "píng shí - spare time / ordinarily / in normal times"
+  },
+  "很": {
+    "level": 3,
+    "notes": "hěn - very"
+  },
+  "怎么": {
+    "level": 1,
+    "notes": "zěn me - how? / what? / why?"
+  },
+  "想": {
+    "level": 4,
+    "notes": "xiǎng - want"
+  },
+  "我": {
+    "level": 5,
+    "notes": "wo - i/me"
+  },
+  "我们": {
+    "level": 5,
+    "notes": "wo men - we/us"
+  },
+  "日常": {
+    "level": 1,
+    "notes": "rì cháng - daily / every-day / day-to-day"
+  },
+  "时": {
+    "level": 3,
+    "notes": "shí - time / when / hour"
+  },
+  "明白": {
+    "level": 1,
+    "notes": "Míng bái - to be clear / obvious / understand"
+  },
+  "明白了": {
+    "level": 1,
+    "notes": "Míng bái le - understood, i got it"
+  },
+  "是": {
+    "level": 5,
+    "notes": "is/am/are"
+  },
+  "来": {
+    "level": 2,
+    "notes": "lái - to come / to arrive"
+  },
+  "歌": {
+    "level": 1,
+    "notes": "gē - song / to sing"
+  },
+  "每天": {
+    "level": 5,
+    "notes": "every day"
+  },
+  "爱": {
+    "level": 3,
+    "notes": "ài - love"
+  },
+  "爱好": {
+    "level": 2,
+    "notes": "ài hào - to like / interest / hobby / to take pleasure in / keen on / fond of / appetite for"
+  },
+  "生活": {
+    "level": 1,
+    "notes": "shēng huó - life / activity / to live / livelihood"
+  },
+  "用": {
+    "level": 2,
+    "notes": "yòng - to use / to employ / to have to"
+  },
+  "电视": {
+    "level": 1,
+    "notes": "diàn shì - television / TV"
+  },
+  "的": {
+    "level": 3,
+    "notes": "possesive marker/ korean 의, ~는 adj modifier"
+  },
+  "看": {
+    "level": 1,
+    "notes": "kàn - to see / to look at / to read"
+  },
+  "聊天": {
+    "level": 1,
+    "notes": "liáo tiān - to chat / to gossip"
+  },
+  "说": {
+    "level": 3,
+    "notes": "shuō - to speak / to say / to explain"
+  },
+  "谢谢": {
+    "level": 3,
+    "notes": "thank you"
+  },
+  "跟": {
+    "level": 1,
+    "notes": "gēn - heel / to follow closely / to go with"
+  },
+  "还": {
+    "level": 1,
+    "notes": "hái - still / still in progress / still more / yet"
+  },
+  "还是": {
+    "level": 1,
+    "notes": "hái shì - or / still / nevertheless"
+  },
+  "这": {
+    "level": 3,
+    "notes": "zhè - this / these"
+  },
+  "这样": {
+    "level": 1,
+    "notes": "zhè yàng - this kind of / so / this way / like this"
+  },
+  "通过": {
+    "level": 1,
+    "notes": "Tōng guò - by / through / via"
+  },
+  "都": {
+    "level": 1,
+    "notes": "dōu - all / both / entirely"
+  },
+  "重要": {
+    "level": 1,
+    "notes": "Zhòng yào - important"
+  },
+  "错": {
+    "level": 1,
+    "notes": "cuò - mistake / wrong / bad"
+  },
+  "除": {
+    "level": 1,
+    "notes": "chú - to get rid of / to remove"
+  },
+  "除了": {
+    "level": 1,
+    "notes": "chú le - besides / apart from (... also...)"
+  }
+}
