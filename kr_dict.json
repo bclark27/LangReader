@@ -3,6 +3,14 @@
     "level": 1,
     "notes": "nurse"
   },
+  "검토": {
+    "level": 1,
+    "notes": "review, examination"
+  },
+  "기침": {
+    "level": 1,
+    "notes": "cough"
+  },
   "기타": {
     "level": 3,
     "notes": "ect. /other"
@@ -47,6 +55,10 @@
     "level": 2,
     "notes": "return"
   },
+  "발견": {
+    "level": 1,
+    "notes": "discovery, detection"
+  },
   "발급": {
     "level": 1,
     "notes": "issue (to give)"
@@ -58,6 +70,18 @@
   "보고서": {
     "level": 1,
     "notes": "report"
+  },
+  "보완": {
+    "level": 1,
+    "notes": "supplementation"
+  },
+  "부분": {
+    "level": 1,
+    "notes": "part / section"
+  },
+  "부족": {
+    "level": 1,
+    "notes": "shortage, lack"
   },
   "빌리다": {
     "level": 1,
@@ -75,6 +99,14 @@
     "level": 5,
     "notes": "think / thought"
   },
+  "설명": {
+    "level": 1,
+    "notes": "explination, account"
+  },
+  "수정": {
+    "level": 1,
+    "notes": "correction, ratification"
+  },
   "순서": {
     "level": 1,
     "notes": "my turn. sequence, order"
@@ -91,9 +123,17 @@
     "level": 1,
     "notes": "apply/request (신청하다)"
   },
+  "신청서": {
+    "level": 1,
+    "notes": "application form"
+  },
   "안내": {
     "level": 3,
     "notes": "information, guidance"
+  },
+  "약속": {
+    "level": 4,
+    "notes": "promis, plan"
   },
   "예약": {
     "level": 1,
@@ -107,6 +147,10 @@
     "level": 2,
     "notes": "long time"
   },
+  "완성": {
+    "level": 1,
+    "notes": "completion, finish"
+  },
   "인기": {
     "level": 1,
     "notes": "popular/public interest"
@@ -114,6 +158,10 @@
   "일정": {
     "level": 1,
     "notes": "schedule"
+  },
+  "작성": {
+    "level": 1,
+    "notes": "make, write up, prepare"
   },
   "접수": {
     "level": 1,
@@ -127,9 +175,21 @@
     "level": 1,
     "notes": "submission/turn in"
   },
+  "주의사항": {
+    "level": 1,
+    "notes": "caution"
+  },
+  "중요": {
+    "level": 4,
+    "notes": "중요(하다) important"
+  },
   "증": {
     "level": 2,
     "notes": "hanja for form/paper"
+  },
+  "증상": {
+    "level": 1,
+    "notes": "symptom"
   },
   "지난주": {
     "level": 3,
@@ -150,6 +210,10 @@
   "처리": {
     "level": 1,
     "notes": "handeling, dispose"
+  },
+  "처방": {
+    "level": 1,
+    "notes": "perscription, recipe"
   },
   "추천": {
     "level": 1,
