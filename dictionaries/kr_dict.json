@@ -7,13 +7,25 @@
     "level": 1,
     "notes": "review, examination"
   },
+  "결국": {
+    "level": 1,
+    "notes": "finally, eventually, ultimately"
+  },
   "경력": {
     "level": 1,
     "notes": "career, work experience"
   },
+  "고장": {
+    "level": 1,
+    "notes": "region, area"
+  },
   "교육": {
     "level": 1,
     "notes": "education, training"
+  },
+  "교환": {
+    "level": 1,
+    "notes": "exchange, swap, interchange"
   },
   "기침": {
     "level": 1,
@@ -26,6 +38,18 @@
   "기한": {
     "level": 1,
     "notes": "deadline"
+  },
+  "납부": {
+    "level": 1,
+    "notes": "payment, pay, make a payment"
+  },
+  "내용": {
+    "level": 1,
+    "notes": "content(s), substance"
+  },
+  "다행히": {
+    "level": 1,
+    "notes": "fortunately, luckily"
   },
   "단어": {
     "level": 5,
@@ -47,6 +71,10 @@
     "level": 2,
     "notes": "colleague, co-worker, fellow worker"
   },
+  "며칠": {
+    "level": 1,
+    "notes": "a few days, several days"
+  },
   "무료": {
     "level": 4,
     "notes": "free"
@@ -58,6 +86,10 @@
   "문장": {
     "level": 2,
     "notes": "sentence"
+  },
+  "물건": {
+    "level": 1,
+    "notes": "thing, stuff, product"
   },
   "미리": {
     "level": 2,
@@ -80,7 +112,7 @@
     "notes": "way / method"
   },
   "보고서": {
-    "level": 1,
+    "level": 2,
     "notes": "report"
   },
   "보완": {
@@ -115,6 +147,10 @@
     "level": 5,
     "notes": "picture"
   },
+  "상황": {
+    "level": 1,
+    "notes": "situation, conditions, circumstance"
+  },
   "생각": {
     "level": 5,
     "notes": "think / thought"
@@ -131,6 +167,10 @@
     "level": 1,
     "notes": "accept, receive, take up"
   },
+  "수리 업체": {
+    "level": 1,
+    "notes": "repair company"
+  },
   "수정": {
     "level": 1,
     "notes": "correction, ratification"
@@ -138,6 +178,10 @@
   "순서": {
     "level": 1,
     "notes": "my turn. sequence, order"
+  },
+  "식후에": {
+    "level": 3,
+    "notes": "before meal"
   },
   "신분": {
     "level": 1,
@@ -155,6 +199,10 @@
     "level": 1,
     "notes": "application form"
   },
+  "실행": {
+    "level": 1,
+    "notes": "practice, action, carry out, implement"
+  },
   "안내": {
     "level": 3,
     "notes": "information, guidance"
@@ -166,6 +214,14 @@
   "업체": {
     "level": 1,
     "notes": "business"
+  },
+  "열": {
+    "level": 1,
+    "notes": "fever, heat"
+  },
+  "영수증": {
+    "level": 2,
+    "notes": "recipt"
   },
   "예약": {
     "level": 1,
@@ -187,6 +243,10 @@
     "level": 1,
     "notes": "completion, finish"
   },
+  "의견": {
+    "level": 1,
+    "notes": "opinion (of/on), view (on/about)"
+  },
   "인기": {
     "level": 1,
     "notes": "popular/public interest"
@@ -199,9 +259,29 @@
     "level": 1,
     "notes": "material(s), data (on)"
   },
+  "자세히": {
+    "level": 1,
+    "notes": "in detail, minutely"
+  },
+  "작동": {
+    "level": 1,
+    "notes": "operate, run, work"
+  },
   "작성": {
     "level": 1,
     "notes": "make, write up, prepare"
+  },
+  "재료": {
+    "level": 1,
+    "notes": "ingredient, material, raw material"
+  },
+  "전체적": {
+    "level": 1,
+    "notes": "overall, general"
+  },
+  "점점": {
+    "level": 1,
+    "notes": "gradually, increasingly, by degrees, little by little"
   },
   "접수": {
     "level": 1,
@@ -218,6 +298,10 @@
   "제출": {
     "level": 1,
     "notes": "submission/turn in"
+  },
+  "조사": {
+    "level": 1,
+    "notes": "investigation, inquiry"
   },
   "주의사항": {
     "level": 1,
@@ -248,7 +332,7 @@
     "notes": "duty, job, function"
   },
   "직원": {
-    "level": 1,
+    "level": 2,
     "notes": "employee"
   },
   "직장": {
@@ -275,6 +359,10 @@
     "level": 1,
     "notes": "attendance, presence, attend"
   },
+  "채소": {
+    "level": 1,
+    "notes": "vegetable"
+  },
   "채용": {
     "level": 3,
     "notes": "recruitment, employment, hire, recruit"
@@ -291,9 +379,17 @@
     "level": 1,
     "notes": "suggestion"
   },
+  "충분히": {
+    "level": 1,
+    "notes": "enough, fully, sufficiently"
+  },
   "친절": {
     "level": 1,
     "notes": "kindness"
+  },
+  "특히": {
+    "level": 1,
+    "notes": "especially, particularly, in particular"
   },
   "팀장님": {
     "level": 5,

@@ -1,11 +1,23 @@
 {
   "一": {
     "level": 3,
-    "notes": "one"
+    "notes": "Yī - one"
   },
   "一个": {
     "level": 5,
     "notes": "one thing"
+  },
+  "一只": {
+    "level": 2,
+    "notes": "Yī zhǐ - one animal"
+  },
+  "七": {
+    "level": 1,
+    "notes": "Qī - 7"
+  },
+  "三": {
+    "level": 5,
+    "notes": "Sān - 3"
   },
   "上午": {
     "level": 2,
@@ -23,6 +35,26 @@
     "level": 3,
     "notes": "zhong wǔ - mid day"
   },
+  "中国": {
+    "level": 5,
+    "notes": "Zhōngguó - China"
+  },
+  "中文": {
+    "level": 5,
+    "notes": "Zhōngwén - chinese"
+  },
+  "为": {
+    "level": 2,
+    "notes": "Wèi - be, become, make, serve as"
+  },
+  "为什么": {
+    "level": 4,
+    "notes": "Wèishéme - why"
+  },
+  "也": {
+    "level": 3,
+    "notes": "Yě - also"
+  },
   "书": {
     "level": 4,
     "notes": "book"
@@ -31,17 +63,45 @@
     "level": 2,
     "notes": "le - last tense"
   },
+  "二": {
+    "level": 3,
+    "notes": "Èr - 2"
+  },
+  "人": {
+    "level": 5,
+    "notes": "Rén - people"
+  },
   "什么": {
     "level": 5,
     "notes": "shén me - what"
   },
   "今天": {
     "level": 5,
-    "notes": "jin tian - today"
+    "notes": "Jīntiān - today"
+  },
+  "他": {
+    "level": 3,
+    "notes": "Tā - he"
+  },
+  "以后": {
+    "level": 1,
+    "notes": "Yǐhòu - after, later"
+  },
+  "但": {
+    "level": 3,
+    "notes": "Dàn - but, however, yet, still"
+  },
+  "但是": {
+    "level": 4,
+    "notes": "Dànshì - however, yet, still"
   },
   "你": {
     "level": 5,
     "notes": "you"
+  },
+  "你呢": {
+    "level": 3,
+    "notes": "Nǐ ne - and you"
   },
   "你好": {
     "level": 3,
@@ -51,17 +111,49 @@
     "level": 3,
     "notes": "zuò - to do / to make"
   },
+  "八": {
+    "level": 2,
+    "notes": "Bā - 8"
+  },
+  "公园": {
+    "level": 1,
+    "notes": "Gōngyuán - garden, public park"
+  },
+  "关系": {
+    "level": 1,
+    "notes": "Guānxì - relation, concern, connection"
+  },
   "再见": {
     "level": 3,
     "notes": "goodbye"
+  },
+  "出": {
+    "level": 2,
+    "notes": "Chū - out, come out"
+  },
+  "出去": {
+    "level": 2,
+    "notes": "Chūqù - go out, exit"
+  },
+  "厨房": {
+    "level": 1,
+    "notes": "Chúfáng - kitchen"
   },
   "去": {
     "level": 4,
     "notes": "qu - go"
   },
+  "只": {
+    "level": 2,
+    "notes": "Zhǐ - only, just, (animal counter)"
+  },
   "叫": {
     "level": 3,
     "notes": "Jiào - to be called (what are you called)"
+  },
+  "可": {
+    "level": 2,
+    "notes": "Kě - can, may, be able to"
   },
   "可以": {
     "level": 2,
@@ -70,6 +162,10 @@
   "吃": {
     "level": 4,
     "notes": "Chī - eat"
+  },
+  "后来": {
+    "level": 1,
+    "notes": "Hòulái - later, afterward"
   },
   "听": {
     "level": 1,
@@ -83,6 +179,22 @@
     "level": 4,
     "notes": "xǐ huan - like, enjoy"
   },
+  "喝": {
+    "level": 4,
+    "notes": "Hē - drink"
+  },
+  "四": {
+    "level": 1,
+    "notes": "Sì - 4"
+  },
+  "回": {
+    "level": 3,
+    "notes": "Huí - return, go back, turn around"
+  },
+  "因为": {
+    "level": 4,
+    "notes": "Yīnwèi - because"
+  },
   "在": {
     "level": 5,
     "notes": "zài - at / in"
@@ -91,9 +203,29 @@
     "level": 1,
     "notes": "jiān chí - to persevere with / to persist in / to insist on"
   },
+  "外": {
+    "level": 2,
+    "notes": "Wài - outer, external, foreign"
+  },
+  "外面": {
+    "level": 1,
+    "notes": "Wàimiàn - outside"
+  },
   "多": {
     "level": 2,
     "notes": "duō - more / much"
+  },
+  "大": {
+    "level": 4,
+    "notes": "Dà - big, large, great"
+  },
+  "大卫": {
+    "level": 1,
+    "notes": "Dà wèi - (name)"
+  },
+  "天": {
+    "level": 2,
+    "notes": "Tiān - day, sky, god"
   },
   "好": {
     "level": 5,
@@ -106,6 +238,10 @@
   "学习": {
     "level": 2,
     "notes": "xué xí - study"
+  },
+  "学校": {
+    "level": 2,
+    "notes": "Xuéxiào - school"
   },
   "实用": {
     "level": 1,
@@ -123,9 +259,25 @@
     "level": 1,
     "notes": "Duì huà - dialogue"
   },
+  "小": {
+    "level": 3,
+    "notes": "Xiǎo - small, young"
+  },
   "小时": {
     "level": 2,
     "notes": "xiǎo shí - hour"
+  },
+  "小明": {
+    "level": 1,
+    "notes": "Xiǎomíng - (name)"
+  },
+  "小李": {
+    "level": 1,
+    "notes": "Xiǎo lǐ - (name)"
+  },
+  "小王": {
+    "level": 1,
+    "notes": "Xiǎo wáng - (name)"
   },
   "就": {
     "level": 1,
@@ -159,9 +311,25 @@
     "level": 5,
     "notes": "wo men - we/us"
   },
+  "房间": {
+    "level": 1,
+    "notes": "Fángjiān - room"
+  },
+  "找": {
+    "level": 1,
+    "notes": "Zhǎo - try to find, look for"
+  },
+  "故事": {
+    "level": 1,
+    "notes": "Gùshì - story"
+  },
   "日常": {
     "level": 1,
     "notes": "rì cháng - daily / every-day / day-to-day"
+  },
+  "早上": {
+    "level": 2,
+    "notes": "Zǎo shang"
   },
   "时": {
     "level": 3,
@@ -179,9 +347,29 @@
     "level": 5,
     "notes": "is/am/are"
   },
+  "晚上": {
+    "level": 2,
+    "notes": "Wǎnshàng - night"
+  },
+  "最后": {
+    "level": 1,
+    "notes": "Zuìhòu - last, final, finally"
+  },
+  "有": {
+    "level": 4,
+    "notes": "Yǒu, have, be, exist"
+  },
+  "朋友": {
+    "level": 4,
+    "notes": "Péngyǒu - friend"
+  },
   "来": {
     "level": 2,
     "notes": "lái - to come / to arrive"
+  },
+  "杯": {
+    "level": 1,
+    "notes": "Bēi - cup, glass, (counter)"
   },
   "歌": {
     "level": 1,
@@ -191,6 +379,38 @@
     "level": 5,
     "notes": "every day"
   },
+  "水": {
+    "level": 5,
+    "notes": "Shuǐ - water"
+  },
+  "没": {
+    "level": 3,
+    "notes": "Méi - not, without"
+  },
+  "没关系": {
+    "level": 1,
+    "notes": "Méiguānxì - It doesn't matter"
+  },
+  "没有": {
+    "level": 3,
+    "notes": "MéiYǒu - not have"
+  },
+  "渴": {
+    "level": 1,
+    "notes": "Kě - thirsty"
+  },
+  "点": {
+    "level": 2,
+    "notes": "Diǎn - point, dot, o'clock"
+  },
+  "热": {
+    "level": 1,
+    "notes": "Rè - hot, warm, fever"
+  },
+  "然后": {
+    "level": 2,
+    "notes": "Ránhòu - then, next"
+  },
   "爱": {
     "level": 3,
     "notes": "ài - love"
@@ -198,6 +418,10 @@
   "爱好": {
     "level": 2,
     "notes": "ài hào - to like / interest / hobby / to take pleasure in / keen on / fond of / appetite for"
+  },
+  "猫": {
+    "level": 3,
+    "notes": "Māo - cat"
   },
   "现在": {
     "level": 4,
@@ -223,9 +447,21 @@
     "level": 1,
     "notes": "kàn - to see / to look at / to read"
   },
+  "看见": {
+    "level": 1,
+    "notes": "Kànjiàn - see"
+  },
+  "美国": {
+    "level": 5,
+    "notes": "Měiguó - usa"
+  },
   "聊天": {
     "level": 1,
     "notes": "liáo tiān - to chat / to gossip"
+  },
+  "苹果": {
+    "level": 2,
+    "notes": "Píngguǒ - apple"
   },
   "说": {
     "level": 3,
@@ -234,6 +470,14 @@
   "谢谢": {
     "level": 3,
     "notes": "thank you"
+  },
+  "起": {
+    "level": 1,
+    "notes": "Qǐ - start, begin, get up"
+  },
+  "起床": {
+    "level": 1,
+    "notes": "Qǐchuáng - get up, wake up"
   },
   "跟": {
     "level": 1,
@@ -263,6 +507,10 @@
     "level": 1,
     "notes": "dōu - all / both / entirely"
   },
+  "里": {
+    "level": 3,
+    "notes": "Lǐ - in, inside, within"
+  },
   "重要": {
     "level": 1,
     "notes": "Zhòng yào - important"
@@ -270,6 +518,10 @@
   "错": {
     "level": 1,
     "notes": "cuò - mistake / wrong / bad"
+  },
+  "问": {
+    "level": 1,
+    "notes": "Wèn - ask, inquire"
   },
   "除": {
     "level": 1,
@@ -282,5 +534,9 @@
   "饭": {
     "level": 3,
     "notes": "Fàn - food / meal"
+  },
+  "高兴": {
+    "level": 2,
+    "notes": "Gāoxìng - happy"
   }
 }
