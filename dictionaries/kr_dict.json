@@ -11,13 +11,33 @@
     "level": 1,
     "notes": "finally, eventually, ultimately"
   },
+  "결제": {
+    "level": 1,
+    "notes": "payment"
+  },
   "경력": {
     "level": 1,
     "notes": "career, work experience"
   },
+  "경영": {
+    "level": 1,
+    "notes": "(business) management, administration"
+  },
+  "계산": {
+    "level": 4,
+    "notes": "pay, checkout"
+  },
   "고장": {
     "level": 1,
     "notes": "region, area"
+  },
+  "공개": {
+    "level": 1,
+    "notes": "to make public, open up"
+  },
+  "관심": {
+    "level": 1,
+    "notes": "interest , attention, concern"
   },
   "교육": {
     "level": 1,
@@ -26,6 +46,26 @@
   "교환": {
     "level": 1,
     "notes": "exchange, swap, interchange"
+  },
+  "기기": {
+    "level": 1,
+    "notes": "device, equipment, instrument"
+  },
+  "기술": {
+    "level": 1,
+    "notes": "1: skill, technique\n2: description, depiction, describe"
+  },
+  "기술자": {
+    "level": 1,
+    "notes": "technician, technical expert"
+  },
+  "기술자 출신": {
+    "level": 1,
+    "notes": "technocrat"
+  },
+  "기업": {
+    "level": 1,
+    "notes": "business, enterprise, company"
   },
   "기침": {
     "level": 1,
@@ -43,9 +83,21 @@
     "level": 1,
     "notes": "payment, pay, make a payment"
   },
+  "내역": {
+    "level": 1,
+    "notes": "details, the breakdown"
+  },
   "내용": {
     "level": 1,
     "notes": "content(s), substance"
+  },
+  "눈길": {
+    "level": 1,
+    "notes": "eyes, attention"
+  },
+  "다양한": {
+    "level": 2,
+    "notes": "various, varied, diverse"
   },
   "다행히": {
     "level": 1,
@@ -71,6 +123,10 @@
     "level": 2,
     "notes": "colleague, co-worker, fellow worker"
   },
+  "만큼": {
+    "level": 4,
+    "notes": "like this, up to this amount, this much"
+  },
   "며칠": {
     "level": 1,
     "notes": "a few days, several days"
@@ -86,6 +142,10 @@
   "문장": {
     "level": 2,
     "notes": "sentence"
+  },
+  "문제": {
+    "level": 3,
+    "notes": "question, problem"
   },
   "물건": {
     "level": 1,
@@ -107,6 +167,14 @@
     "level": 1,
     "notes": "issue (to give)"
   },
+  "발전": {
+    "level": 1,
+    "notes": "development, progress, advance(ment), growth"
+  },
+  "발표": {
+    "level": 1,
+    "notes": "announcement, statement, presentation"
+  },
   "방법": {
     "level": 2,
     "notes": "way / method"
@@ -119,17 +187,29 @@
     "level": 1,
     "notes": "supplementation"
   },
+  "부문": {
+    "level": 1,
+    "notes": "field, (경제 분야) sector"
+  },
   "부분": {
     "level": 2,
     "notes": "part / section"
   },
   "부족": {
-    "level": 1,
+    "level": 2,
     "notes": "shortage, lack"
   },
   "부탁": {
     "level": 1,
     "notes": "request, ask"
+  },
+  "부품": {
+    "level": 1,
+    "notes": "part, component"
+  },
+  "비교": {
+    "level": 1,
+    "notes": "comparison, [동사] compare, make[draw] a comparison (between)"
   },
   "빌리다": {
     "level": 1,
@@ -155,6 +235,10 @@
     "level": 5,
     "notes": "think / thought"
   },
+  "생산": {
+    "level": 1,
+    "notes": "production, produce, manufacture"
+  },
   "설거지": {
     "level": 1,
     "notes": "dish-washing"
@@ -162,6 +246,14 @@
   "설명": {
     "level": 1,
     "notes": "explination, account"
+  },
+  "세계적": {
+    "level": 1,
+    "notes": "global, universal, (世界的)"
+  },
+  "세계적인": {
+    "level": 1,
+    "notes": "worldwide"
   },
   "수리": {
     "level": 1,
@@ -191,6 +283,10 @@
     "level": 1,
     "notes": "id card"
   },
+  "신제품": {
+    "level": 1,
+    "notes": "new product"
+  },
   "신청": {
     "level": 1,
     "notes": "apply/request (신청하다)"
@@ -203,6 +299,10 @@
     "level": 1,
     "notes": "practice, action, carry out, implement"
   },
+  "아래": {
+    "level": 3,
+    "notes": "the bottom, lower"
+  },
   "안내": {
     "level": 3,
     "notes": "information, guidance"
@@ -214,6 +314,10 @@
   "업체": {
     "level": 1,
     "notes": "business"
+  },
+  "여러": {
+    "level": 3,
+    "notes": "many, various, several"
   },
   "열": {
     "level": 1,
@@ -239,9 +343,17 @@
     "level": 2,
     "notes": "long time"
   },
+  "올해": {
+    "level": 2,
+    "notes": "this year"
+  },
   "완성": {
     "level": 1,
     "notes": "completion, finish"
+  },
+  "용어": {
+    "level": 1,
+    "notes": "term, terminology"
   },
   "의견": {
     "level": 1,
@@ -254,6 +366,10 @@
   "일정": {
     "level": 1,
     "notes": "schedule"
+  },
+  "입사": {
+    "level": 1,
+    "notes": "join[enter] a company[firm]"
   },
   "자료": {
     "level": 1,
@@ -275,9 +391,29 @@
     "level": 1,
     "notes": "ingredient, material, raw material"
   },
+  "전문": {
+    "level": 1,
+    "notes": "one's specialty, professional"
+  },
+  "전문 용어": {
+    "level": 1,
+    "notes": "technical term, terminology, jargon"
+  },
+  "전문가": {
+    "level": 1,
+    "notes": "expert, a professional"
+  },
   "전체적": {
     "level": 1,
     "notes": "overall, general"
+  },
+  "전통": {
+    "level": 1,
+    "notes": "tradition, custom; (관습) convention; (유산) heritage"
+  },
+  "절대": {
+    "level": 2,
+    "notes": "absolutly, completely, never"
   },
   "점점": {
     "level": 1,
@@ -295,9 +431,17 @@
     "level": 1,
     "notes": "organization, arrange"
   },
+  "정보기술": {
+    "level": 1,
+    "notes": "information technology"
+  },
   "제출": {
     "level": 1,
     "notes": "submission/turn in"
+  },
+  "제품": {
+    "level": 2,
+    "notes": "product, goods"
   },
   "조사": {
     "level": 1,
@@ -323,6 +467,10 @@
     "level": 3,
     "notes": "last week"
   },
+  "지역 뉴스": {
+    "level": 1,
+    "notes": "regional news"
+  },
   "지원자": {
     "level": 1,
     "notes": "applicant, volunteer"
@@ -342,6 +490,10 @@
   "직장 동료": {
     "level": 1,
     "notes": "colleague at work"
+  },
+  "직접": {
+    "level": 1,
+    "notes": "personally, in person, directly, firsthand"
   },
   "진료": {
     "level": 1,
@@ -375,9 +527,21 @@
     "level": 1,
     "notes": "perscription, recipe"
   },
+  "최고경영자": {
+    "level": 1,
+    "notes": "CEO"
+  },
+  "최초의": {
+    "level": 1,
+    "notes": "the first ~, the initial ~"
+  },
   "추천": {
     "level": 1,
     "notes": "suggestion"
+  },
+  "출신": {
+    "level": 1,
+    "notes": "~ person of, someone came from or was born to be ~ (describes using another word, someone from XYZ)"
   },
   "충분히": {
     "level": 1,
@@ -395,9 +559,29 @@
     "level": 5,
     "notes": "team lead/boss"
   },
+  "평소": {
+    "level": 1,
+    "notes": "usual, average"
+  },
+  "행사": {
+    "level": 1,
+    "notes": "event, function, (special) occasion, ceremony"
+  },
+  "화려하게": {
+    "level": 1,
+    "notes": "splendidly, gorgeously, brilliantly"
+  },
+  "화려한": {
+    "level": 1,
+    "notes": "splendid, gorgeous, brilliant"
+  },
   "확인": {
     "level": 4,
     "notes": "check, search"
+  },
+  "활용": {
+    "level": 1,
+    "notes": "application, practical use"
   },
   "회사": {
     "level": 5,

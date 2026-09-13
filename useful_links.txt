@@ -1,5 +1,7 @@
 kr:
     https://en.dict.naver.com
+    https://kids.donga.com/
+    https://news.kbs.co.kr/news/pc/main/main.html
 
 cn:
     https://www.dong-chinese.com/wiki/search
