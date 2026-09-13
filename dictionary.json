@@ -1,0 +1,14 @@
+{
+  "你好": {
+    "level": 3,
+    "notes": "hello / hi - common greeting"
+  },
+  "再见": {
+    "level": 3,
+    "notes": "goodbye"
+  },
+  "谢谢": {
+    "level": 3,
+    "notes": "thank you"
+  }
+}

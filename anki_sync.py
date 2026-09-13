@@ -15,6 +15,14 @@ existence only - no field-level merging, no touching existing notes:
     edit a word's notes on either side, this script will never overwrite
     that edit or touch the Anki card's review history/scheduling - it
     only ever adds brand new items, never modifies existing ones.
+  - A word that already exists ANYWHERE in your Anki collection (not just
+    the target deck - e.g. left over from an earlier experiment, or added
+    to a different deck by hand) is left alone rather than pushed again.
+    Anki's own duplicate check works the same way by default, so this
+    also avoids "cannot create note because it is a duplicate" errors.
+  - If one word still fails to push for some reason, it's skipped with a
+    clear message and the rest of the batch keeps going - one bad word
+    can't stop everything else from syncing.
 
 One-time setup:
   1. Install Anki desktop (https://apps.ankiweb.net) if you haven't.
@@ -107,8 +115,11 @@ def save_dictionary(dictionary, path):
         json.dump(dictionary, f, ensure_ascii=False, indent=2, sort_keys=True)
 
 
-def get_anki_words(url, deck):
-    note_ids = anki_request(url, "findNotes", query=f'deck:"{deck}"')
+def get_words_in_scope(url, query):
+    """Returns {word: back_text} for notes matching an AnkiConnect search
+    query, using the note's first field as the word (works for "Basic" and
+    any similar note type where the first field holds the word/term)."""
+    note_ids = anki_request(url, "findNotes", query=query)
     if not note_ids:
         return {}
     infos = anki_request(url, "notesInfo", notes=note_ids)
@@ -136,28 +147,58 @@ def run(dict_path, deck=None, tag=None, url="http://127.0.0.1:8765", do_web_sync
 
     dictionary = load_dictionary(dict_path)
     local_words = set(dictionary.keys())
-    anki_words_map = get_anki_words(url, deck)
-    anki_words = set(anki_words_map.keys())
 
-    to_push = sorted(local_words - anki_words)
-    to_pull = sorted(anki_words - local_words)
-    shared = local_words & anki_words
+    # Two separate lookups on purpose:
+    #  - deck_words: only notes actually sitting in THIS deck. Used to
+    #    decide what to pull down, and what counts as "already synced".
+    #  - collection_words: notes of the same note type ANYWHERE in your
+    #    Anki collection. Anki's own duplicate check for addNote defaults
+    #    to this same scope (whole collection, same note type) rather than
+    #    "this deck only" - so we have to match it, or addNote will reject
+    #    words we thought were new with "cannot create note because it is
+    #    a duplicate" (e.g. a word that already exists in a different deck
+    #    from an earlier experiment, a manual add, or a renamed deck).
+    deck_words_map = get_words_in_scope(url, f'deck:"{deck}" note:Basic')
+    collection_words_map = get_words_in_scope(url, "note:Basic")
+    deck_words = set(deck_words_map.keys())
+    collection_words = set(collection_words_map.keys())
 
+    to_push = sorted(local_words - collection_words)
+    to_pull = sorted(deck_words - local_words)
+    shared = local_words & deck_words
+    elsewhere = sorted((local_words & collection_words) - deck_words)
+
+    pushed, push_failures = [], []
     for word in to_push:
         entry = dictionary[word]
-        anki_request(
-            url, "addNote",
-            note={
-                "deckName": deck,
-                "modelName": "Basic",
-                "fields": {"Front": word, "Back": text_to_html(entry["notes"])},
-                "tags": [tag],
-            },
+        try:
+            anki_request(
+                url, "addNote",
+                note={
+                    "deckName": deck,
+                    "modelName": "Basic",
+                    "fields": {"Front": word, "Back": text_to_html(entry["notes"])},
+                    "tags": [tag],
+                },
+            )
+            pushed.append(word)
+        except Exception as e:
+            # One bad word (duplicate, weird characters, whatever) must
+            # not take the rest of the batch down with it.
+            push_failures.append((word, str(e)))
+    out(f"Pushed {len(pushed)} new word(s) to Anki" + (f": {', '.join(pushed)}" if pushed else ""))
+    if push_failures:
+        out(f"{len(push_failures)} word(s) could not be pushed and were skipped:")
+        for word, err in push_failures:
+            out(f"  - {word}: {err}")
+    if elsewhere:
+        out(
+            f"{len(elsewhere)} word(s) already exist elsewhere in your Anki collection "
+            f"(different deck) - left alone rather than duplicated: {', '.join(elsewhere)}"
         )
-    out(f"Pushed {len(to_push)} new word(s) to Anki" + (f": {', '.join(to_push)}" if to_push else ""))
 
     for word in to_pull:
-        dictionary[word] = {"notes": anki_words_map[word], "level": DEFAULT_LEVEL}
+        dictionary[word] = {"notes": deck_words_map[word], "level": DEFAULT_LEVEL}
     if to_pull:
         save_dictionary(dictionary, dict_path)
     out(f"Pulled {len(to_pull)} new word(s) into {os.path.basename(dict_path)}" + (f": {', '.join(to_pull)}" if to_pull else ""))
@@ -171,7 +212,13 @@ def run(dict_path, deck=None, tag=None, url="http://127.0.0.1:8765", do_web_sync
         except Exception as e:
             out(f"Note: could not trigger AnkiWeb sync ({e}). You can sync manually from Anki.")
 
-    return {"pushed": to_push, "pulled": to_pull, "shared": sorted(shared)}
+    return {
+        "pushed": pushed,
+        "push_failures": push_failures,
+        "pulled": to_pull,
+        "shared": sorted(shared),
+        "elsewhere": elsewhere,
+    }
 
 
 def main():
@@ -186,13 +233,16 @@ def main():
     args = parser.parse_args()
 
     try:
-        run(args.dictionary, deck=args.deck, tag=args.tag, url=args.url, do_web_sync=not args.no_web_sync)
+        result = run(args.dictionary, deck=args.deck, tag=args.tag, url=args.url, do_web_sync=not args.no_web_sync)
     except ConnectionError as e:
         print(f"\n{e}")
         sys.exit(1)
     except Exception as e:
         print(f"\nSync failed: {e}")
         sys.exit(1)
+
+    if result["push_failures"]:
+        sys.exit(2)  # partial success: worth a non-zero exit, but not the same as a hard failure
 
 
 if __name__ == "__main__":

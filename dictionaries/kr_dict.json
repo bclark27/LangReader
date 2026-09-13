@@ -7,6 +7,14 @@
     "level": 1,
     "notes": "review, examination"
   },
+  "경력": {
+    "level": 1,
+    "notes": "career, work experience"
+  },
+  "교육": {
+    "level": 1,
+    "notes": "education, training"
+  },
   "기침": {
     "level": 1,
     "notes": "cough"
@@ -34,6 +42,10 @@
   "도서관": {
     "level": 5,
     "notes": "library"
+  },
+  "동료": {
+    "level": 2,
+    "notes": "colleague, co-worker, fellow worker"
   },
   "무료": {
     "level": 4,
@@ -76,12 +88,16 @@
     "notes": "supplementation"
   },
   "부분": {
-    "level": 1,
+    "level": 2,
     "notes": "part / section"
   },
   "부족": {
     "level": 1,
     "notes": "shortage, lack"
+  },
+  "부탁": {
+    "level": 1,
+    "notes": "request, ask"
   },
   "빌리다": {
     "level": 1,
@@ -91,6 +107,10 @@
     "level": 3,
     "notes": "lost book"
   },
+  "사람": {
+    "level": 5,
+    "notes": "person"
+  },
   "사진": {
     "level": 5,
     "notes": "picture"
@@ -99,9 +119,17 @@
     "level": 5,
     "notes": "think / thought"
   },
+  "설거지": {
+    "level": 1,
+    "notes": "dish-washing"
+  },
   "설명": {
     "level": 1,
     "notes": "explination, account"
+  },
+  "수리": {
+    "level": 1,
+    "notes": "accept, receive, take up"
   },
   "수정": {
     "level": 1,
@@ -135,9 +163,17 @@
     "level": 4,
     "notes": "promis, plan"
   },
+  "업체": {
+    "level": 1,
+    "notes": "business"
+  },
   "예약": {
     "level": 1,
     "notes": "reserve (예약하다)"
+  },
+  "예정": {
+    "level": 1,
+    "notes": "schedule, be expected"
   },
   "오늘": {
     "level": 3,
@@ -159,6 +195,10 @@
     "level": 1,
     "notes": "schedule"
   },
+  "자료": {
+    "level": 1,
+    "notes": "material(s), data (on)"
+  },
   "작성": {
     "level": 1,
     "notes": "make, write up, prepare"
@@ -170,6 +210,10 @@
   "접수처": {
     "level": 1,
     "notes": "recception desk / reception place"
+  },
+  "정리": {
+    "level": 1,
+    "notes": "organization, arrange"
   },
   "제출": {
     "level": 1,
@@ -195,9 +239,25 @@
     "level": 3,
     "notes": "last week"
   },
+  "지원자": {
+    "level": 1,
+    "notes": "applicant, volunteer"
+  },
+  "직무": {
+    "level": 1,
+    "notes": "duty, job, function"
+  },
   "직원": {
     "level": 1,
     "notes": "employee"
+  },
+  "직장": {
+    "level": 1,
+    "notes": "job, work; office"
+  },
+  "직장 동료": {
+    "level": 1,
+    "notes": "colleague at work"
   },
   "진료": {
     "level": 1,
@@ -206,6 +266,18 @@
   "진료실": {
     "level": 2,
     "notes": "medical room, doctors office"
+  },
+  "진행": {
+    "level": 1,
+    "notes": "progress, head (toward)"
+  },
+  "참석": {
+    "level": 1,
+    "notes": "attendance, presence, attend"
+  },
+  "채용": {
+    "level": 3,
+    "notes": "recruitment, employment, hire, recruit"
   },
   "처리": {
     "level": 1,
@@ -223,9 +295,21 @@
     "level": 1,
     "notes": "kindness"
   },
+  "팀장님": {
+    "level": 5,
+    "notes": "team lead/boss"
+  },
   "확인": {
     "level": 4,
     "notes": "check, search"
+  },
+  "회사": {
+    "level": 5,
+    "notes": "comapny"
+  },
+  "회의": {
+    "level": 2,
+    "notes": "meeting"
   },
   "훨씬": {
     "level": 3,
