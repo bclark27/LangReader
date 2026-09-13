@@ -351,6 +351,10 @@
     "level": 1,
     "notes": "completion, finish"
   },
+  "외국인": {
+    "level": 5,
+    "notes": "foreigner"
+  },
   "용어": {
     "level": 1,
     "notes": "term, terminology"
@@ -450,6 +454,10 @@
   "주의사항": {
     "level": 1,
     "notes": "caution"
+  },
+  "중국인": {
+    "level": 5,
+    "notes": "chinese people"
   },
   "중요": {
     "level": 4,
@@ -562,6 +570,10 @@
   "평소": {
     "level": 1,
     "notes": "usual, average"
+  },
+  "하루 종일": {
+    "level": 3,
+    "notes": "all day long"
   },
   "행사": {
     "level": 1,

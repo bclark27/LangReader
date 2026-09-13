@@ -11,6 +11,10 @@
     "level": 2,
     "notes": "Yī zhǐ - one animal"
   },
+  "一起": {
+    "level": 2,
+    "notes": "Yīqǐ - together"
+  },
   "七": {
     "level": 1,
     "notes": "Qī - 7"
@@ -34,6 +38,10 @@
   "不": {
     "level": 5,
     "notes": "not"
+  },
+  "个": {
+    "level": 4,
+    "notes": "ge - thing, (general counter)"
   },
   "中午": {
     "level": 3,
@@ -62,6 +70,10 @@
   "书": {
     "level": 4,
     "notes": "book"
+  },
+  "买": {
+    "level": 2,
+    "notes": "Mǎi - buy"
   },
   "了": {
     "level": 2,
@@ -139,6 +151,14 @@
     "level": 3,
     "notes": "goodbye"
   },
+  "写": {
+    "level": 1,
+    "notes": "xiě - write, draw"
+  },
+  "冯大文": {
+    "level": 1,
+    "notes": "Féngdàwén - (name)"
+  },
   "出": {
     "level": 2,
     "notes": "Chū - out, come out"
@@ -183,6 +203,10 @@
     "level": 2,
     "notes": "kěyǐ - can / ability"
   },
+  "号码": {
+    "level": 1,
+    "notes": "hào​mǎ - number"
+  },
   "吃": {
     "level": 4,
     "notes": "Chī - eat"
@@ -198,6 +222,10 @@
   "听": {
     "level": 1,
     "notes": "tīng - to listen / to hear"
+  },
+  "和": {
+    "level": 2,
+    "notes": "hé - and (usually nouns)"
   },
   "哪里": {
     "level": 4,
@@ -235,6 +263,10 @@
     "level": 1,
     "notes": "Zuò - sit"
   },
+  "坐下": {
+    "level": 2,
+    "notes": "Zuò xià - sit down"
+  },
   "坚持": {
     "level": 1,
     "notes": "jiān chí - to persevere with / to persist in / to insist on"
@@ -259,6 +291,10 @@
     "level": 1,
     "notes": "Dà wèi - (name)"
   },
+  "大楼": {
+    "level": 1,
+    "notes": "dà​lóu - a building"
+  },
   "天": {
     "level": 2,
     "notes": "Tiān - day, sky, god"
@@ -270,6 +306,10 @@
   "太阳": {
     "level": 2,
     "notes": "Tàiyáng - sun"
+  },
+  "头": {
+    "level": 1,
+    "notes": "tóu / tou - head, top"
   },
   "好": {
     "level": 5,
@@ -290,6 +330,10 @@
   "学校": {
     "level": 2,
     "notes": "Xuéxiào - school"
+  },
+  "学生": {
+    "level": 4,
+    "notes": "xué​sheng - student"
   },
   "完": {
     "level": 1,
@@ -339,6 +383,10 @@
     "level": 3,
     "notes": "gōng zuò - work"
   },
+  "市中心": {
+    "level": 2,
+    "notes": "shì​zhōng​xīn - city center, downtown"
+  },
   "平时": {
     "level": 1,
     "notes": "píng shí - spare time / ordinarily / in normal times"
@@ -347,17 +395,33 @@
     "level": 1,
     "notes": "Chuáng - bed"
   },
+  "张纸": {
+    "level": 1,
+    "notes": "zhāng zhǐ - paper"
+  },
   "很": {
     "level": 3,
     "notes": "hěn - very"
+  },
+  "快": {
+    "level": 1,
+    "notes": "kuài - rapid, quick, speedy"
   },
   "怎么": {
     "level": 1,
     "notes": "zěn me - how? / what? / why?"
   },
+  "情电影": {
+    "level": 1,
+    "notes": "Qíng diànyǐng - romance movie"
+  },
   "想": {
     "level": 4,
     "notes": "xiǎng - want"
+  },
+  "慢": {
+    "level": 1,
+    "notes": "màn - slow(ly)"
   },
   "我": {
     "level": 5,
@@ -371,13 +435,29 @@
     "level": 1,
     "notes": "Fángjiān - room"
   },
+  "手机": {
+    "level": 1,
+    "notes": "Shǒujī - cell phone"
+  },
   "找": {
     "level": 1,
     "notes": "Zhǎo - try to find, look for"
   },
-  "故事": {
+  "抬": {
     "level": 1,
+    "notes": "tái - lift, carry"
+  },
+  "拿": {
+    "level": 1,
+    "notes": "ná - take, hold, grasp"
+  },
+  "故事": {
+    "level": 2,
     "notes": "Gùshì - story"
+  },
+  "教室": {
+    "level": 1,
+    "notes": "jiào​shì - classroom"
   },
   "日常": {
     "level": 1,
@@ -385,7 +465,7 @@
   },
   "早上": {
     "level": 2,
-    "notes": "Zǎo shang"
+    "notes": "Zǎo shang - early morning"
   },
   "时": {
     "level": 3,
@@ -439,6 +519,10 @@
     "level": 1,
     "notes": "Bēi - cup, glass, (counter)"
   },
+  "林小月": {
+    "level": 1,
+    "notes": "zhàosīyǔ - (name)"
+  },
   "桌子": {
     "level": 1,
     "notes": "Zhuōzǐ - table"
@@ -451,9 +535,17 @@
     "level": 1,
     "notes": "Yǐzǐ - chair"
   },
+  "楼": {
+    "level": 1,
+    "notes": "Lóu - a building"
+  },
   "歌": {
     "level": 1,
     "notes": "gē - song / to sing"
+  },
+  "每": {
+    "level": 1,
+    "notes": "Měi - every, each"
   },
   "每天": {
     "level": 5,
@@ -466,6 +558,10 @@
   "水": {
     "level": 5,
     "notes": "Shuǐ - water"
+  },
+  "水果": {
+    "level": 1,
+    "notes": "Shuǐguǒ - fruit"
   },
   "没": {
     "level": 3,
@@ -519,9 +615,21 @@
     "level": 2,
     "notes": "yòng - to use / to employ / to have to"
   },
+  "电影": {
+    "level": 2,
+    "notes": "Diànyǐng - movie"
+  },
+  "电影院": {
+    "level": 1,
+    "notes": "Diànyǐngyuàn - cinima, theater"
+  },
   "电视": {
     "level": 1,
     "notes": "diàn shì - television / TV"
+  },
+  "电话": {
+    "level": 2,
+    "notes": "Diànhuà - phone"
   },
   "的": {
     "level": 3,
@@ -547,6 +655,10 @@
     "level": 1,
     "notes": "Shuìjiào - sleep"
   },
+  "知道": {
+    "level": 3,
+    "notes": "zhī​dào - to know"
+  },
   "笑": {
     "level": 1,
     "notes": "Xiào - laugh, smile"
@@ -554,6 +666,10 @@
   "累": {
     "level": 1,
     "notes": "lèi - tired"
+  },
+  "纸": {
+    "level": 1,
+    "notes": "zhǐ - paper"
   },
   "美国": {
     "level": 5,
@@ -587,9 +703,25 @@
     "level": 3,
     "notes": "thank you"
   },
+  "走": {
+    "level": 1,
+    "notes": "zǒu - walk, go on foot"
+  },
+  "走到": {
+    "level": 1,
+    "notes": "Zǒu dào - walk to"
+  },
   "走路": {
     "level": 1,
     "notes": "Zǒulù - walk, go on foot"
+  },
+  "走进": {
+    "level": 1,
+    "notes": "zǒu​jìn - to enter, go into"
+  },
+  "赵思雨": {
+    "level": 1,
+    "notes": "zhàosīyǔ - (name)"
   },
   "起": {
     "level": 1,
@@ -598,6 +730,10 @@
   "起床": {
     "level": 1,
     "notes": "Qǐchuáng - get up, wake up"
+  },
+  "跑": {
+    "level": 1,
+    "notes": "pǎo / páo - run, in a hurry"
   },
   "跑步": {
     "level": 1,
@@ -627,6 +763,14 @@
     "level": 1,
     "notes": "Tōng guò - by / through / via"
   },
+  "那个": {
+    "level": 3,
+    "notes": "nà​ge - that one, that thing"
+  },
+  "那儿": {
+    "level": 1,
+    "notes": "Nà'er - there"
+  },
   "都": {
     "level": 1,
     "notes": "dōu - all / both / entirely"
@@ -643,6 +787,14 @@
     "level": 1,
     "notes": "cuò - mistake / wrong / bad"
   },
+  "门": {
+    "level": 3,
+    "notes": "Mén - door"
+  },
+  "门口": {
+    "level": 1,
+    "notes": "mén​kǒu - dorrway, gate"
+  },
   "问": {
     "level": 1,
     "notes": "Wèn - ask, inquire"
@@ -658,6 +810,14 @@
   "饭": {
     "level": 3,
     "notes": "Fàn - food / meal"
+  },
+  "饭店": {
+    "level": 2,
+    "notes": "Fàndiàn - Restaurant"
+  },
+  "高": {
+    "level": 1,
+    "notes": "gāo - high, tall; lofty, elevated"
   },
   "高兴": {
     "level": 2,
