@@ -1,0 +1,6 @@
+kr:
+    https://en.dict.naver.com
+
+cn:
+    https://www.dong-chinese.com/wiki/search
+    https://hskstory.com/stories/hsk-1

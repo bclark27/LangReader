@@ -19,6 +19,10 @@
     "level": 5,
     "notes": "Sān - 3"
   },
+  "上": {
+    "level": 2,
+    "notes": "shǎng - up, above"
+  },
   "上午": {
     "level": 2,
     "notes": "Shàngwǔ - morning"
@@ -67,6 +71,10 @@
     "level": 3,
     "notes": "Èr - 2"
   },
+  "五": {
+    "level": 2,
+    "notes": "Wǔ - 5"
+  },
   "人": {
     "level": 5,
     "notes": "Rén - people"
@@ -86,6 +94,10 @@
   "以后": {
     "level": 1,
     "notes": "Yǐhòu - after, later"
+  },
+  "们": {
+    "level": 5,
+    "notes": "men - plural marker"
   },
   "但": {
     "level": 3,
@@ -135,6 +147,14 @@
     "level": 2,
     "notes": "Chūqù - go out, exit"
   },
+  "到": {
+    "level": 1,
+    "notes": "Dào - arrive, go to, reach"
+  },
+  "原来": {
+    "level": 1,
+    "notes": "Yuánlái - turns out, originally, at first"
+  },
   "厨房": {
     "level": 1,
     "notes": "Chúfáng - kitchen"
@@ -142,6 +162,10 @@
   "去": {
     "level": 4,
     "notes": "qu - go"
+  },
+  "又": {
+    "level": 1,
+    "notes": "Yòu - again"
   },
   "只": {
     "level": 2,
@@ -167,6 +191,10 @@
     "level": 1,
     "notes": "Hòulái - later, afterward"
   },
+  "吗": {
+    "level": 5,
+    "notes": "ma - question partical"
+  },
   "听": {
     "level": 1,
     "notes": "tīng - to listen / to hear"
@@ -191,6 +219,10 @@
     "level": 3,
     "notes": "Huí - return, go back, turn around"
   },
+  "回到": {
+    "level": 1,
+    "notes": "Huí dào - return to"
+  },
   "因为": {
     "level": 4,
     "notes": "Yīnwèi - because"
@@ -198,6 +230,10 @@
   "在": {
     "level": 5,
     "notes": "zài - at / in"
+  },
+  "坐": {
+    "level": 1,
+    "notes": "Zuò - sit"
   },
   "坚持": {
     "level": 1,
@@ -227,9 +263,21 @@
     "level": 2,
     "notes": "Tiān - day, sky, god"
   },
+  "天气": {
+    "level": 3,
+    "notes": "Tiānqì - weather"
+  },
+  "太阳": {
+    "level": 2,
+    "notes": "Tàiyáng - sun"
+  },
   "好": {
     "level": 5,
     "notes": "good"
+  },
+  "子": {
+    "level": 2,
+    "notes": "Zǐ - child, son"
   },
   "学": {
     "level": 4,
@@ -242,6 +290,10 @@
   "学校": {
     "level": 2,
     "notes": "Xuéxiào - school"
+  },
+  "完": {
+    "level": 1,
+    "notes": "Wán - finish, complete"
   },
   "实用": {
     "level": 1,
@@ -291,6 +343,10 @@
     "level": 1,
     "notes": "píng shí - spare time / ordinarily / in normal times"
   },
+  "床": {
+    "level": 1,
+    "notes": "Chuáng - bed"
+  },
   "很": {
     "level": 3,
     "notes": "hěn - very"
@@ -335,6 +391,10 @@
     "level": 3,
     "notes": "shí - time / when / hour"
   },
+  "明天": {
+    "level": 2,
+    "notes": "Míngtiān - tomorrow"
+  },
   "明白": {
     "level": 1,
     "notes": "Míng bái - to be clear / obvious / understand"
@@ -342,6 +402,14 @@
   "明白了": {
     "level": 1,
     "notes": "Míng bái le - understood, i got it"
+  },
+  "星期": {
+    "level": 1,
+    "notes": "Xīngqí - week"
+  },
+  "星期天": {
+    "level": 1,
+    "notes": "Xīngqítiān - sunday"
   },
   "是": {
     "level": 5,
@@ -371,6 +439,18 @@
     "level": 1,
     "notes": "Bēi - cup, glass, (counter)"
   },
+  "桌子": {
+    "level": 1,
+    "notes": "Zhuōzǐ - table"
+  },
+  "椅": {
+    "level": 1,
+    "notes": "yǐ - chair"
+  },
+  "椅子": {
+    "level": 1,
+    "notes": "Yǐzǐ - chair"
+  },
   "歌": {
     "level": 1,
     "notes": "gē - song / to sing"
@@ -378,6 +458,10 @@
   "每天": {
     "level": 5,
     "notes": "every day"
+  },
+  "气": {
+    "level": 2,
+    "notes": "Qì - gas, air, breath"
   },
   "水": {
     "level": 5,
@@ -447,9 +531,29 @@
     "level": 1,
     "notes": "kàn - to see / to look at / to read"
   },
+  "看着": {
+    "level": 1,
+    "notes": "Kànzhe - looking"
+  },
   "看见": {
     "level": 1,
     "notes": "Kànjiàn - see"
+  },
+  "着": {
+    "level": 1,
+    "notes": "Zhe - wearing, touch"
+  },
+  "睡觉": {
+    "level": 1,
+    "notes": "Shuìjiào - sleep"
+  },
+  "笑": {
+    "level": 1,
+    "notes": "Xiào - laugh, smile"
+  },
+  "累": {
+    "level": 1,
+    "notes": "lèi - tired"
   },
   "美国": {
     "level": 5,
@@ -463,13 +567,29 @@
     "level": 2,
     "notes": "Píngguǒ - apple"
   },
+  "见": {
+    "level": 1,
+    "notes": "Jiàn - see, refer, meet"
+  },
+  "认识": {
+    "level": 4,
+    "notes": "Rènshí - know, understand, recognize"
+  },
   "说": {
     "level": 3,
     "notes": "shuō - to speak / to say / to explain"
   },
+  "说话": {
+    "level": 2,
+    "notes": "Shuōhuà - say, speak, talk"
+  },
   "谢谢": {
     "level": 3,
     "notes": "thank you"
+  },
+  "走路": {
+    "level": 1,
+    "notes": "Zǒulù - walk, go on foot"
   },
   "起": {
     "level": 1,
@@ -478,6 +598,10 @@
   "起床": {
     "level": 1,
     "notes": "Qǐchuáng - get up, wake up"
+  },
+  "跑步": {
+    "level": 1,
+    "notes": "Pǎobù - running"
   },
   "跟": {
     "level": 1,
