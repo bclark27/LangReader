@@ -35,9 +35,17 @@
     "level": 2,
     "notes": "Shàngwǔ - morning"
   },
+  "上班": {
+    "level": 1,
+    "notes": "shàng​bān - go to work"
+  },
   "下午": {
     "level": 2,
     "notes": "Xiàwǔ - afternoon"
+  },
+  "下雨": {
+    "level": 2,
+    "notes": "xià​yǔ - to rain"
   },
   "不": {
     "level": 5,
@@ -147,6 +155,22 @@
     "level": 2,
     "notes": "Bā - 8"
   },
+  "公交": {
+    "level": 1,
+    "notes": "Gōngjiāo - bus"
+  },
+  "公交车": {
+    "level": 1,
+    "notes": "Gōngjiāo chē - the bus"
+  },
+  "公交车站": {
+    "level": 1,
+    "notes": "Gōngjiāo chē zhàn - bus stop"
+  },
+  "公司": {
+    "level": 1,
+    "notes": "gōng​sī - company"
+  },
   "公园": {
     "level": 1,
     "notes": "Gōngyuán - garden, public park"
@@ -175,6 +199,10 @@
     "level": 2,
     "notes": "Chūqù - go out, exit"
   },
+  "分": {
+    "level": 3,
+    "notes": "Fēn - minute, divide, separate"
+  },
   "别": {
     "level": 3,
     "notes": "Bié - other, another, do not"
@@ -182,6 +210,10 @@
   "到": {
     "level": 1,
     "notes": "Dào - arrive, go to, reach"
+  },
+  "前面": {
+    "level": 1,
+    "notes": "Qiánmiàn - front, in front of"
   },
   "卖": {
     "level": 3,
@@ -311,6 +343,10 @@
     "level": 1,
     "notes": "Dà wèi - (name)"
   },
+  "大家": {
+    "level": 2,
+    "notes": "dà​jiā - everyone"
+  },
   "大楼": {
     "level": 1,
     "notes": "dà​lóu - a building"
@@ -331,6 +367,10 @@
     "level": 1,
     "notes": "tóu / tou - head, top"
   },
+  "女": {
+    "level": 4,
+    "notes": "Nǚ - female, woman"
+  },
   "女孩": {
     "level": 3,
     "notes": "Nǚhái - girl"
@@ -342,6 +382,10 @@
   "好": {
     "level": 5,
     "notes": "good"
+  },
+  "妈妈": {
+    "level": 3,
+    "notes": "Māmā - mom"
   },
   "子": {
     "level": 2,
@@ -494,6 +538,10 @@
   "教室": {
     "level": 1,
     "notes": "jiào​shì - classroom"
+  },
+  "新": {
+    "level": 3,
+    "notes": "xīn - new, recent"
   },
   "日常": {
     "level": 1,
@@ -715,6 +763,14 @@
     "level": 3,
     "notes": "Piào - ticket"
   },
+  "窗户": {
+    "level": 1,
+    "notes": "Chuānghù - window"
+  },
+  "站": {
+    "level": 2,
+    "notes": "Zhàn - stand, station"
+  },
   "笑": {
     "level": 1,
     "notes": "Xiào - laugh, smile"
@@ -746,6 +802,10 @@
   "街": {
     "level": 3,
     "notes": "Jiē - street"
+  },
+  "要": {
+    "level": 4,
+    "notes": "Yào - will/future tense, want, wish"
   },
   "见": {
     "level": 1,
@@ -815,6 +875,14 @@
     "level": 1,
     "notes": "gēn - heel / to follow closely / to go with"
   },
+  "路": {
+    "level": 1,
+    "notes": "lù - road, path, where you are going, journy"
+  },
+  "车": {
+    "level": 3,
+    "notes": "Chē - car, vehicle"
+  },
   "过": {
     "level": 3,
     "notes": "Guò - [verb]+过= i have done [verb]\n\npass, cross"
@@ -834,6 +902,10 @@
   "这样": {
     "level": 1,
     "notes": "zhè yàng - this kind of / so / this way / like this"
+  },
+  "迟到": {
+    "level": 1,
+    "notes": "chí​dào - arrive late"
   },
   "通过": {
     "level": 1,
@@ -887,6 +959,10 @@
     "level": 3,
     "notes": "Yǔ - rain"
   },
+  "音乐": {
+    "level": 2,
+    "notes": "Yīnyuè - music"
+  },
   "风": {
     "level": 1,
     "notes": "fēng - wind, air"
@@ -898,6 +974,10 @@
   "饭店": {
     "level": 2,
     "notes": "Fàndiàn - Restaurant"
+  },
+  "马东": {
+    "level": 1,
+    "notes": "mǎ dōng - (name)"
   },
   "高": {
     "level": 1,
