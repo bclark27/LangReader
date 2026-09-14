@@ -43,6 +43,10 @@
     "level": 4,
     "notes": "ge - thing, (general counter)"
   },
+  "中": {
+    "level": 4,
+    "notes": "zhōng - middle"
+  },
   "中午": {
     "level": 3,
     "notes": "zhong wǔ - mid day"
@@ -167,9 +171,17 @@
     "level": 2,
     "notes": "Chūqù - go out, exit"
   },
+  "别": {
+    "level": 3,
+    "notes": "Bié - other, another, do not"
+  },
   "到": {
     "level": 1,
     "notes": "Dào - arrive, go to, reach"
+  },
+  "卖": {
+    "level": 3,
+    "notes": "Mài - sell"
   },
   "原来": {
     "level": 1,
@@ -210,6 +222,10 @@
   "吃": {
     "level": 4,
     "notes": "Chī - eat"
+  },
+  "名字": {
+    "level": 3,
+    "notes": "míng​zi - name"
   },
   "后来": {
     "level": 1,
@@ -311,6 +327,14 @@
     "level": 1,
     "notes": "tóu / tou - head, top"
   },
+  "女孩": {
+    "level": 3,
+    "notes": "Nǚhái - girl"
+  },
+  "她": {
+    "level": 3,
+    "notes": "tā - she"
+  },
   "好": {
     "level": 5,
     "notes": "good"
@@ -395,6 +419,10 @@
     "level": 1,
     "notes": "Chuáng - bed"
   },
+  "开始": {
+    "level": 3,
+    "notes": "Kāishǐ - start"
+  },
   "张纸": {
     "level": 1,
     "notes": "zhāng zhǐ - paper"
@@ -418,6 +446,10 @@
   "想": {
     "level": 4,
     "notes": "xiǎng - want"
+  },
+  "意思": {
+    "level": 3,
+    "notes": "Yìsi - interest, fun, idea, opinion, meaning"
   },
   "慢": {
     "level": 1,
@@ -579,6 +611,10 @@
     "level": 1,
     "notes": "Kě - thirsty"
   },
+  "漂亮": {
+    "level": 3,
+    "notes": "Piàoliang - pretty"
+  },
   "点": {
     "level": 2,
     "notes": "Diǎn - point, dot, o'clock"
@@ -598,6 +634,14 @@
   "爱好": {
     "level": 2,
     "notes": "ài hào - to like / interest / hobby / to take pleasure in / keen on / fond of / appetite for"
+  },
+  "爱情": {
+    "level": 3,
+    "notes": "ài​qíng - romance"
+  },
+  "爱情电影": {
+    "level": 3,
+    "notes": "ài​ qíng Diàn yǐng - romance movie"
   },
   "猫": {
     "level": 3,
@@ -631,6 +675,10 @@
     "level": 2,
     "notes": "Diànhuà - phone"
   },
+  "男人": {
+    "level": 3,
+    "notes": "Nánrén - man"
+  },
   "的": {
     "level": 3,
     "notes": "possesive marker/ korean 의, ~는 adj modifier"
@@ -659,9 +707,17 @@
     "level": 3,
     "notes": "zhī​dào - to know"
   },
+  "票": {
+    "level": 3,
+    "notes": "Piào - ticket"
+  },
   "笑": {
     "level": 1,
     "notes": "Xiào - laugh, smile"
+  },
+  "等待": {
+    "level": 1,
+    "notes": "Děngdài - wait, expectation"
   },
   "累": {
     "level": 1,
@@ -683,6 +739,10 @@
     "level": 2,
     "notes": "Píngguǒ - apple"
   },
+  "街": {
+    "level": 3,
+    "notes": "Jiē - street"
+  },
   "见": {
     "level": 1,
     "notes": "Jiàn - see, refer, meet"
@@ -698,6 +758,14 @@
   "说话": {
     "level": 2,
     "notes": "Shuōhuà - say, speak, talk"
+  },
+  "请": {
+    "level": 3,
+    "notes": "Qǐng - please, request"
+  },
+  "请别": {
+    "level": 3,
+    "notes": "Qǐng bié - please dont"
   },
   "谢谢": {
     "level": 3,
@@ -742,6 +810,10 @@
   "跟": {
     "level": 1,
     "notes": "gēn - heel / to follow closely / to go with"
+  },
+  "过": {
+    "level": 3,
+    "notes": "Guò - [verb]+过= i have done [verb]\n\npass, cross"
   },
   "还": {
     "level": 1,
@@ -806,6 +878,10 @@
   "除了": {
     "level": 1,
     "notes": "chú le - besides / apart from (... also...)"
+  },
+  "雨": {
+    "level": 3,
+    "notes": "Yǔ - rain"
   },
   "饭": {
     "level": 3,

@@ -107,9 +107,17 @@
     "level": 5,
     "notes": "word"
   },
+  "대상": {
+    "level": 3,
+    "notes": "the object, target, the subject"
+  },
   "대여": {
     "level": 1,
     "notes": "rental"
+  },
+  "대통령": {
+    "level": 3,
+    "notes": "president"
   },
   "도서": {
     "level": 3,
@@ -271,6 +279,10 @@
     "level": 1,
     "notes": "my turn. sequence, order"
   },
+  "승소": {
+    "level": 3,
+    "notes": "win a case, win a suit"
+  },
   "식후에": {
     "level": 3,
     "notes": "before meal"
@@ -336,7 +348,7 @@
     "notes": "schedule, be expected"
   },
   "오늘": {
-    "level": 3,
+    "level": 5,
     "notes": "today"
   },
   "오래": {
@@ -439,6 +451,14 @@
     "level": 1,
     "notes": "information technology"
   },
+  "정부": {
+    "level": 3,
+    "notes": "government, administration"
+  },
+  "제기": {
+    "level": 1,
+    "notes": "issue raising (제기하다)"
+  },
   "제출": {
     "level": 1,
     "notes": "submission/turn in"
@@ -539,6 +559,10 @@
     "level": 1,
     "notes": "CEO"
   },
+  "최종": {
+    "level": 3,
+    "notes": "final, end, the last, ultimate end"
+  },
   "최초의": {
     "level": 1,
     "notes": "the first ~, the initial ~"
@@ -558,6 +582,10 @@
   "친절": {
     "level": 1,
     "notes": "kindness"
+  },
+  "투자자": {
+    "level": 3,
+    "notes": "investor"
   },
   "특히": {
     "level": 1,
