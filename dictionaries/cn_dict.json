@@ -11,6 +11,10 @@
     "level": 2,
     "notes": "Yī zhǐ - one animal"
   },
+  "一点一点": {
+    "level": 2,
+    "notes": "Yī diǎn yī diǎn - little by little"
+  },
   "一起": {
     "level": 2,
     "notes": "Yīqǐ - together"
@@ -883,6 +887,10 @@
     "level": 3,
     "notes": "Yǔ - rain"
   },
+  "风": {
+    "level": 1,
+    "notes": "fēng - wind, air"
+  },
   "饭": {
     "level": 3,
     "notes": "Fàn - food / meal"
@@ -898,5 +906,9 @@
   "高兴": {
     "level": 2,
     "notes": "Gāoxìng - happy"
+  },
+  "黑色": {
+    "level": 1,
+    "notes": "Hēisè - black"
   }
 }
