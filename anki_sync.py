@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
 Anki Sync - a tiny standalone script that keeps a dictionary.json file (as
-produced/used by chinese_reader.py) and an Anki deck in sync, by word
-existence only - no field-level merging, no touching existing notes:
+produced/used by chinese_reader.py) and an Anki deck in sync:
 
   - Words in dictionary.json that Anki doesn't have yet -> pushed to Anki
     as brand new notes (Front = word, Back = notes), starting fresh in
@@ -11,10 +10,24 @@ existence only - no field-level merging, no touching existing notes:
     dictionary.json doesn't have yet -> pulled in as new dictionary
     entries (word + note, familiarity level defaults to 3 - set it
     properly next time you're in the reader).
-  - Words that exist on BOTH sides are left completely untouched. If you
-    edit a word's notes on either side, this script will never overwrite
-    that edit or touch the Anki card's review history/scheduling - it
-    only ever adds brand new items, never modifies existing ones.
+  - Words that exist on BOTH sides have their NOTES kept in sync too, but
+    safely: a small local state file (dictionary.json.sync_state.json)
+    remembers a short checksum of what was last agreed between the two
+    sides for each word (not the full text - just enough to detect
+    change, keeping that file tiny). Only three things can happen to a
+    shared word's notes:
+      - Neither side changed since last sync -> nothing happens.
+      - Only one side changed -> that change is copied to the other side
+        automatically (safe, unambiguous).
+      - BOTH sides changed to something different -> flagged as a
+        conflict and never auto-resolved. When run in a terminal you can
+        pick "local" or "anki" for each conflicted word on the spot;
+        otherwise (e.g. run from a script/cron) conflicts are just
+        listed, left alone, and asked about again next run.
+    Familiarity level never syncs either direction - that stays a purely
+    local, manual thing in the reader app. Updating a note's fields never
+    touches its Anki review history/scheduling either way - that's a
+    separate thing Anki tracks per-card, untouched by field edits.
   - A word that already exists ANYWHERE in your Anki collection (not just
     the target deck - e.g. left over from an earlier experiment, or added
     to a different deck by hand) is left alone rather than pushed again.
@@ -44,6 +57,7 @@ library only.
 """
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -115,10 +129,39 @@ def save_dictionary(dictionary, path):
         json.dump(dictionary, f, ensure_ascii=False, indent=2, sort_keys=True)
 
 
+# ------------------------------------------------------------ sync state --
+# Tiny local file remembering, per word, a short checksum of the notes text
+# both sides last agreed on. Storing just a checksum (not the full text)
+# keeps this file small - we only need to know WHETHER something changed
+# since last sync, never what the old text actually was.
+def sync_state_path(dict_path):
+    return dict_path + ".sync_state.json"
+
+
+def load_sync_state(dict_path):
+    path = sync_state_path(dict_path)
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+def save_sync_state(dict_path, state):
+    with open(sync_state_path(dict_path), "w", encoding="utf-8") as f:
+        json.dump(state, f, ensure_ascii=False, indent=2, sort_keys=True)
+
+
+def notes_checksum(text):
+    return hashlib.sha256(text.strip().encode("utf-8")).hexdigest()[:16]
+
+
 def get_words_in_scope(url, query):
-    """Returns {word: back_text} for notes matching an AnkiConnect search
-    query, using the note's first field as the word (works for "Basic" and
-    any similar note type where the first field holds the word/term)."""
+    """Returns {word: {"note_id": ..., "back": plain_text}} for notes
+    matching an AnkiConnect search query, using the note's first field as
+    the word (works for "Basic" and any similar note type where the first
+    field holds the word/term)."""
     note_ids = anki_request(url, "findNotes", query=query)
     if not note_ids:
         return {}
@@ -130,14 +173,17 @@ def get_words_in_scope(url, query):
         word = html_to_text(front).strip()
         if word and word not in words:  # first match wins if Anki has dupes
             back = fields.get("Back", {}).get("value", "")
-            words[word] = html_to_text(back)
+            words[word] = {"note_id": info.get("noteId"), "back": html_to_text(back)}
     return words
 
 
 # ------------------------------------------------------------------ main --
-def run(dict_path, deck=None, tag=None, url="http://127.0.0.1:8765", do_web_sync=True, out=print):
+def run(dict_path, deck=None, tag=None, url="http://127.0.0.1:8765", do_web_sync=True,
+        out=print, interactive=None, input_func=input):
     deck = deck or os.path.splitext(os.path.basename(dict_path))[0]
     tag = tag or deck
+    if interactive is None:
+        interactive = sys.stdin.isatty()
 
     out(f"Dictionary file : {dict_path}")
     out(f"Anki deck       : {deck}")
@@ -165,7 +211,7 @@ def run(dict_path, deck=None, tag=None, url="http://127.0.0.1:8765", do_web_sync
 
     to_push = sorted(local_words - collection_words)
     to_pull = sorted(deck_words - local_words)
-    shared = local_words & deck_words
+    shared = sorted(local_words & deck_words)
     elsewhere = sorted((local_words & collection_words) - deck_words)
 
     pushed, push_failures = [], []
@@ -198,12 +244,95 @@ def run(dict_path, deck=None, tag=None, url="http://127.0.0.1:8765", do_web_sync
         )
 
     for word in to_pull:
-        dictionary[word] = {"notes": deck_words_map[word], "level": DEFAULT_LEVEL}
+        dictionary[word] = {"notes": deck_words_map[word]["back"], "level": DEFAULT_LEVEL}
     if to_pull:
         save_dictionary(dictionary, dict_path)
     out(f"Pulled {len(to_pull)} new word(s) into {os.path.basename(dict_path)}" + (f": {', '.join(to_pull)}" if to_pull else ""))
 
-    out(f"{len(shared)} word(s) already on both sides - left untouched.")
+    # --- sync notes text for words that exist on both sides ---
+    sync_state = load_sync_state(dict_path)
+    notes_pushed, notes_pulled, conflicts, conflicts_resolved = [], [], [], []
+    state_dirty = False
+
+    for word in shared:
+        local_notes = dictionary[word]["notes"]
+        anki_note_id = deck_words_map[word]["note_id"]
+        anki_notes = deck_words_map[word]["back"]
+        local_hash = notes_checksum(local_notes)
+        anki_hash = notes_checksum(anki_notes)
+
+        if local_hash == anki_hash:
+            if sync_state.get(word) != local_hash:
+                sync_state[word] = local_hash
+                state_dirty = True
+            continue
+
+        base_hash = sync_state.get(word)
+        if base_hash is None:
+            # Never tracked before and they differ right now - no way to
+            # know who changed, so treat it like any other conflict.
+            conflicts.append(word)
+            continue
+
+        local_changed = local_hash != base_hash
+        anki_changed = anki_hash != base_hash
+
+        if local_changed and not anki_changed:
+            try:
+                anki_request(url, "updateNoteFields", note={"id": anki_note_id, "fields": {"Back": text_to_html(local_notes)}})
+                sync_state[word] = local_hash
+                state_dirty = True
+                notes_pushed.append(word)
+            except Exception as e:
+                out(f"  - could not push updated notes for '{word}': {e}")
+        elif anki_changed and not local_changed:
+            dictionary[word]["notes"] = anki_notes
+            sync_state[word] = anki_hash
+            state_dirty = True
+            notes_pulled.append(word)
+        else:
+            conflicts.append(word)
+
+    if notes_pushed:
+        out(f"Pushed updated notes to Anki for {len(notes_pushed)} word(s): {', '.join(notes_pushed)}")
+    if notes_pulled:
+        save_dictionary(dictionary, dict_path)
+        out(f"Pulled updated notes from Anki for {len(notes_pulled)} word(s): {', '.join(notes_pulled)}")
+
+    if conflicts:
+        out(f"{len(conflicts)} word(s) changed on both sides with different content - needs a decision:")
+        for word in conflicts:
+            local_text = dictionary[word]["notes"]
+            anki_text = deck_words_map[word]["back"]
+            out(f"  '{word}':")
+            out(f"    [1] local : {local_text}")
+            out(f"    [2] anki  : {anki_text}")
+            if not interactive:
+                out("    (not resolved - run this in a terminal to choose, or edit one side to match the other)")
+                continue
+            choice = input_func(f"    Keep which for '{word}'? [1=local / 2=anki / s=skip]: ").strip().lower()
+            if choice == "1":
+                try:
+                    anki_request(url, "updateNoteFields", note={"id": deck_words_map[word]["note_id"], "fields": {"Back": text_to_html(local_text)}})
+                    sync_state[word] = notes_checksum(local_text)
+                    state_dirty = True
+                    conflicts_resolved.append((word, "local"))
+                except Exception as e:
+                    out(f"    could not push '{word}' to Anki ({e}) - will ask again next sync")
+            elif choice == "2":
+                dictionary[word]["notes"] = anki_text
+                sync_state[word] = notes_checksum(anki_text)
+                state_dirty = True
+                conflicts_resolved.append((word, "anki"))
+            else:
+                out(f"    skipped '{word}' - will ask again next sync")
+        if any(res == "anki" for _, res in conflicts_resolved):
+            save_dictionary(dictionary, dict_path)
+
+    if state_dirty:
+        save_sync_state(dict_path, sync_state)
+
+    out(f"{len(shared) - len(conflicts)} shared word(s) confirmed in sync.")
 
     if do_web_sync:
         try:
@@ -216,8 +345,12 @@ def run(dict_path, deck=None, tag=None, url="http://127.0.0.1:8765", do_web_sync
         "pushed": pushed,
         "push_failures": push_failures,
         "pulled": to_pull,
-        "shared": sorted(shared),
+        "shared": shared,
         "elsewhere": elsewhere,
+        "notes_pushed": notes_pushed,
+        "notes_pulled": notes_pulled,
+        "conflicts": conflicts,
+        "conflicts_resolved": conflicts_resolved,
     }
 
 
@@ -241,7 +374,7 @@ def main():
         print(f"\nSync failed: {e}")
         sys.exit(1)
 
-    if result["push_failures"]:
+    if result["push_failures"] or result["conflicts"]:
         sys.exit(2)  # partial success: worth a non-zero exit, but not the same as a hard failure
 
 

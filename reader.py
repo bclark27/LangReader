@@ -287,13 +287,7 @@ class ChineseReaderApp:
             return False  # error already shown by load_dictionary; keep current file open
         self.dictionary = result
         self.dict_path = path
-        self.current_word = None
-        self.word_label.config(text="(click a highlighted word)")
-        self.notes_text.delete("1.0", "end")
-        self.level_combo.config(state="disabled")
-        self.level_var.set(str(DEFAULT_LEVEL))
-        self.save_btn.config(state=tk.DISABLED)
-        self.delete_btn.config(state=tk.DISABLED)
+        self.word_var.set("")  # triggers _on_word_var_changed -> resets the whole panel
         self._update_dict_count()
         self._update_path_label()
         self._update_top_label()
@@ -321,12 +315,18 @@ class ChineseReaderApp:
         self._build_right_panel(right)
 
     def _build_left_panel(self, parent):
-        tk.Label(parent, text="Selected word", font=(None, 11, "bold")).pack(anchor="w")
-        self.word_label = tk.Label(
-            parent, text="(click a highlighted word)",
-            font=(self.cjk_font_name, 26), fg="#1a5276", wraplength=300, justify="left",
+        tk.Label(parent, text="Word", font=(None, 11, "bold")).pack(anchor="w")
+        self.word_var = tk.StringVar(value="")
+        self.word_entry = tk.Entry(
+            parent, textvariable=self.word_var,
+            font=(self.cjk_font_name, 26), fg="#1a5276",
         )
-        self.word_label.pack(anchor="w", pady=(0, 10))
+        self.word_entry.pack(anchor="w", fill=tk.X, pady=(0, 2))
+        self.word_var.trace_add("write", self._on_word_var_changed)
+        tk.Label(
+            parent, text="Click a highlighted word in the reader, or type/paste one here to look it up.",
+            fg="#888", font=(None, 9), wraplength=320, justify="left",
+        ).pack(anchor="w", pady=(0, 10))
 
         tk.Label(parent, text="Notes", font=(None, 11, "bold")).pack(anchor="w")
         self.notes_text = tk.Text(parent, wrap="word", font=self.notes_font, height=14, undo=True)
@@ -473,7 +473,7 @@ class ChineseReaderApp:
                     bound_tags.add(tag_name)
                     level = self.dictionary.get(matched_word, {}).get("level", DEFAULT_LEVEL)
                     text_widget.tag_configure(tag_name, background=level_color(level))
-                    text_widget.tag_bind(tag_name, "<Button-1>", lambda e, w=matched_word: self.select_word(w))
+                    text_widget.tag_bind(tag_name, "<Button-1>", lambda e, w=matched_word: self.word_var.set(w))
                     text_widget.tag_bind(tag_name, "<Enter>", lambda e: text_widget.config(cursor="hand2"))
                     text_widget.tag_bind(tag_name, "<Leave>", lambda e: text_widget.config(cursor="xterm"))
                 text_widget.tag_add(tag_name, start_index, end_index)
@@ -481,16 +481,31 @@ class ChineseReaderApp:
             else:
                 i += 1
 
-    def select_word(self, word):
-        self.current_word = word
-        entry = self.dictionary.get(word, {"notes": "", "level": DEFAULT_LEVEL})
-        self.word_label.config(text=word)
-        self.notes_text.delete("1.0", "end")
-        self.notes_text.insert("1.0", entry.get("notes", ""))
-        self.level_combo.config(state="readonly")
-        self.level_var.set(str(entry.get("level", DEFAULT_LEVEL)))
-        self.save_btn.config(state=tk.NORMAL)
-        self.delete_btn.config(state=tk.NORMAL)
+    def _on_word_var_changed(self, *_args):
+        self._load_word(self.word_var.get().strip())
+
+    def _load_word(self, word):
+        """Refreshes the notes/level panel for `word`. Doesn't touch the
+        word entry itself - that's the caller's job (either the user typed
+        it, or a reader click set it via self.word_var.set(...))."""
+        if word and word in self.dictionary:
+            self.current_word = word
+            entry = self.dictionary[word]
+            self.notes_text.delete("1.0", "end")
+            self.notes_text.insert("1.0", entry.get("notes", ""))
+            self.level_combo.config(state="readonly")
+            self.level_var.set(str(entry.get("level", DEFAULT_LEVEL)))
+            self.save_btn.config(state=tk.NORMAL)
+            self.delete_btn.config(state=tk.NORMAL)
+        else:
+            self.current_word = None
+            self.notes_text.delete("1.0", "end")
+            self.level_combo.config(state="disabled")
+            self.level_var.set(str(DEFAULT_LEVEL))
+            self.save_btn.config(state=tk.DISABLED)
+            self.delete_btn.config(state=tk.DISABLED)
+            if word:
+                self.notes_text.insert("1.0", "(not in dictionary - use 'Add new word' on the right to create it)")
 
     # ------------------------------------------------------------ notes --
     def save_current_notes(self):
@@ -520,13 +535,7 @@ class ChineseReaderApp:
         if not save_dictionary(self.dictionary, self.dict_path):
             self.dictionary[removed_word] = backup_entry  # roll back in-memory state
             return
-        self.current_word = None
-        self.word_label.config(text="(click a highlighted word)")
-        self.notes_text.delete("1.0", "end")
-        self.level_combo.config(state="disabled")
-        self.level_var.set(str(DEFAULT_LEVEL))
-        self.save_btn.config(state=tk.DISABLED)
-        self.delete_btn.config(state=tk.DISABLED)
+        self.word_var.set("")  # triggers _on_word_var_changed -> resets the whole panel
         self._update_dict_count()
         self.highlight_text()
 
