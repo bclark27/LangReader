@@ -22,6 +22,13 @@ also remembers the last dictionary you had open and reopens it
 automatically next time, so a typical session is just: launch app, paste
 text, study.
 
+If anki_sync.py sits in the same folder as this script, a "Sync to Anki"
+button appears at the top of the reader and syncs the currently open
+dictionary with Anki (deck name = dictionary filename) - see anki_sync.py
+for what that does and what it needs (Anki desktop open with the
+AnkiConnect add-on installed). Without that file present, the button is
+simply omitted.
+
 Dictionary file format (a plain JSON file, human readable / hand
 editable) - a flat word -> {notes, level} mapping. `level` is your
 familiarity with the word, 1 (barely know it) to 5 (mastered) - it
@@ -42,6 +49,7 @@ install it with something like: sudo apt install python3-tk
 
 import json
 import os
+import sys
 import tkinter as tk
 from tkinter import font as tkfont
 from tkinter import messagebox
@@ -52,6 +60,17 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_DICT_PATH = os.path.join(SCRIPT_DIR, "dictionary.json")
 CONFIG_PATH = os.path.join(SCRIPT_DIR, "reader_config.json")
 MAX_RECENT = 8
+ANKI_CONNECT_URL = "http://127.0.0.1:8765"
+
+# anki_sync.py is an optional sibling script (see anki_sync.py itself for
+# details) - the Sync-to-Anki button only appears if it's importable, so
+# this app works fine standalone with zero extra files.
+if SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, SCRIPT_DIR)
+try:
+    import anki_sync
+except Exception:
+    anki_sync = None
 
 DEFAULT_DICTIONARY = {
     "你好": {"notes": "hello / hi - common greeting", "level": 3},
@@ -370,6 +389,8 @@ class ChineseReaderApp:
         self.top_label = tk.Label(top_row, text="", font=(None, 11, "bold"))
         self.top_label.pack(side=tk.LEFT)
         tk.Button(top_row, text="Highlight / Refresh", command=self.highlight_text).pack(side=tk.RIGHT)
+        if anki_sync is not None:
+            tk.Button(top_row, text="Sync to Anki", command=self.sync_to_anki).pack(side=tk.RIGHT, padx=(0, 6))
         self._update_top_label()
 
         legend = tk.Frame(parent)
@@ -433,6 +454,98 @@ class ChineseReaderApp:
     def _flash_status(self, label, text, ms=4000):
         label.config(text=text, wraplength=420, justify="left")
         label.after(ms, lambda: label.config(text=""))
+
+    # -------------------------------------------------------- anki sync --
+    def sync_to_anki(self):
+        """Runs anki_sync.run() on whichever dictionary is currently open.
+        Synchronous by design (simplest, most robust option) - the window
+        will be unresponsive for the duration, which is normally under a
+        second but can take longer if Anki isn't open (connection timeout)."""
+        deck = os.path.splitext(os.path.basename(self.dict_path))[0]
+        self.top_label.config(text=f"Syncing '{deck}' with Anki...")
+        self.root.update_idletasks()
+
+        log_lines = []
+        try:
+            result = anki_sync.run(
+                self.dict_path, deck=deck, url=ANKI_CONNECT_URL,
+                do_web_sync=True, out=log_lines.append, interactive=False,
+            )
+        except Exception as e:
+            self._update_top_label()
+            messagebox.showerror("Anki sync failed", str(e))
+            return
+
+        resolved = 0
+        for word in result["conflicts"]:
+            detail = result["conflict_details"][word]
+            choice = self._show_conflict_dialog(word, detail["local"], detail["anki"])
+            if choice in ("local", "anki"):
+                try:
+                    anki_sync.resolve_conflict(
+                        self.dict_path, ANKI_CONNECT_URL, word, choice,
+                        detail["local"], detail["anki"], detail["note_id"],
+                    )
+                    resolved += 1
+                except Exception as e:
+                    messagebox.showerror("Anki sync failed", f"Could not apply your choice for '{word}':\n{e}")
+
+        # anki_sync.py wrote directly to dict_path (and the sync-state file)
+        # on disk - reload so the reader's in-memory copy matches.
+        reloaded = load_dictionary(self.dict_path)
+        if reloaded is not None:
+            self.dictionary = reloaded
+        self._update_dict_count()
+        self.highlight_text()
+        self._load_word(self.word_var.get().strip())  # refresh left panel if the current word's notes changed
+        self._update_top_label()
+
+        summary = (
+            f"Anki sync: pushed {len(result['pushed'])}, pulled {len(result['pulled'])}, "
+            f"notes updated {len(result['notes_pushed']) + len(result['notes_pulled'])}, "
+            f"{resolved} conflict(s) resolved."
+        )
+        self._flash_status(self.right_status, summary, ms=8000)
+
+    def _show_conflict_dialog(self, word, local_text, anki_text):
+        """Modal dialog for one notes conflict. Returns 'local', 'anki', or
+        'skip' (also returned if the window is closed without choosing)."""
+        choice = {"value": "skip"}
+        dialog = tk.Toplevel(self.root)
+        dialog.title(f"Anki sync conflict: {word}")
+
+        tk.Label(
+            dialog, text=f"'{word}' changed on both sides since the last sync.",
+            font=(self.cjk_font_name, 12, "bold"), wraplength=440, justify="left",
+        ).pack(anchor="w", padx=12, pady=(12, 8))
+
+        tk.Label(dialog, text="Local (in your dictionary):", font=(None, 10, "bold")).pack(anchor="w", padx=12)
+        local_box = tk.Text(dialog, height=4, width=50, wrap="word", font=self.notes_font)
+        local_box.insert("1.0", local_text)
+        local_box.config(state="disabled")
+        local_box.pack(fill=tk.BOTH, expand=True, padx=12, pady=(2, 10))
+
+        tk.Label(dialog, text="Anki (on the card):", font=(None, 10, "bold")).pack(anchor="w", padx=12)
+        anki_box = tk.Text(dialog, height=4, width=50, wrap="word", font=self.notes_font)
+        anki_box.insert("1.0", anki_text)
+        anki_box.config(state="disabled")
+        anki_box.pack(fill=tk.BOTH, expand=True, padx=12, pady=(2, 10))
+
+        def pick(value):
+            choice["value"] = value
+            dialog.destroy()
+
+        btn_row = tk.Frame(dialog)
+        btn_row.pack(pady=(0, 12))
+        tk.Button(btn_row, text="Keep Local \u2192 push to Anki", command=lambda: pick("local")).pack(side=tk.LEFT, padx=5)
+        tk.Button(btn_row, text="Keep Anki \u2192 pull to dictionary", command=lambda: pick("anki")).pack(side=tk.LEFT, padx=5)
+        tk.Button(btn_row, text="Skip for now", command=lambda: pick("skip")).pack(side=tk.LEFT, padx=5)
+
+        dialog.transient(self.root)
+        dialog.grab_set()
+        dialog.protocol("WM_DELETE_WINDOW", lambda: pick("skip"))
+        self.root.wait_window(dialog)
+        return choice["value"]
 
     # ----------------------------------------------------------- reader --
     def highlight_text(self):

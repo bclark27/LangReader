@@ -177,6 +177,32 @@ def get_words_in_scope(url, query):
     return words
 
 
+def resolve_conflict(dict_path, url, word, choice, local_text, anki_text, note_id):
+    """Applies a manual decision for one conflicted word: choice "local"
+    pushes the local notes to the Anki card, "anki" pulls the Anki notes
+    into the dictionary; anything else is a no-op (still a conflict next
+    sync). Always reads dictionary.json and the sync-state file fresh from
+    disk first, since a sync pass may have already written other changes -
+    this is meant to be called standalone, after (or independent of) run().
+    Returns True if a change was applied, False for a skip."""
+    if choice not in ("local", "anki"):
+        return False
+    sync_state = load_sync_state(dict_path)
+    if choice == "local":
+        anki_request(url, "updateNoteFields", note={"id": note_id, "fields": {"Back": text_to_html(local_text)}})
+        sync_state[word] = notes_checksum(local_text)
+    else:
+        dictionary = load_dictionary(dict_path)
+        if word in dictionary:
+            dictionary[word]["notes"] = anki_text
+        else:
+            dictionary[word] = {"notes": anki_text, "level": DEFAULT_LEVEL}
+        save_dictionary(dictionary, dict_path)
+        sync_state[word] = notes_checksum(anki_text)
+    save_sync_state(dict_path, sync_state)
+    return True
+
+
 # ------------------------------------------------------------------ main --
 def run(dict_path, deck=None, tag=None, url="http://127.0.0.1:8765", do_web_sync=True,
         out=print, interactive=None, input_func=input):
@@ -298,39 +324,40 @@ def run(dict_path, deck=None, tag=None, url="http://127.0.0.1:8765", do_web_sync
     if notes_pulled:
         save_dictionary(dictionary, dict_path)
         out(f"Pulled updated notes from Anki for {len(notes_pulled)} word(s): {', '.join(notes_pulled)}")
+    if state_dirty:
+        # Flush BEFORE any conflict resolution below, since resolve_conflict()
+        # does its own fresh load/save cycle per word - it needs to start
+        # from this up-to-date file, and nothing after this point should
+        # overwrite the sync-state file wholesale again (that would clobber
+        # whatever resolve_conflict() just wrote).
+        save_sync_state(dict_path, sync_state)
 
+    conflict_details = {}
     if conflicts:
         out(f"{len(conflicts)} word(s) changed on both sides with different content - needs a decision:")
         for word in conflicts:
             local_text = dictionary[word]["notes"]
             anki_text = deck_words_map[word]["back"]
+            note_id = deck_words_map[word]["note_id"]
+            conflict_details[word] = {"local": local_text, "anki": anki_text, "note_id": note_id}
             out(f"  '{word}':")
             out(f"    [1] local : {local_text}")
             out(f"    [2] anki  : {anki_text}")
             if not interactive:
                 out("    (not resolved - run this in a terminal to choose, or edit one side to match the other)")
                 continue
-            choice = input_func(f"    Keep which for '{word}'? [1=local / 2=anki / s=skip]: ").strip().lower()
-            if choice == "1":
+            choice_raw = input_func(f"    Keep which for '{word}'? [1=local / 2=anki / s=skip]: ").strip().lower()
+            choice = {"1": "local", "2": "anki"}.get(choice_raw)
+            if choice:
                 try:
-                    anki_request(url, "updateNoteFields", note={"id": deck_words_map[word]["note_id"], "fields": {"Back": text_to_html(local_text)}})
-                    sync_state[word] = notes_checksum(local_text)
-                    state_dirty = True
-                    conflicts_resolved.append((word, "local"))
+                    resolve_conflict(dict_path, url, word, choice, local_text, anki_text, note_id)
+                    conflicts_resolved.append((word, choice))
+                    if choice == "anki":
+                        dictionary[word]["notes"] = anki_text  # keep our in-memory copy consistent too
                 except Exception as e:
-                    out(f"    could not push '{word}' to Anki ({e}) - will ask again next sync")
-            elif choice == "2":
-                dictionary[word]["notes"] = anki_text
-                sync_state[word] = notes_checksum(anki_text)
-                state_dirty = True
-                conflicts_resolved.append((word, "anki"))
+                    out(f"    could not apply '{word}' ({e}) - will ask again next sync")
             else:
                 out(f"    skipped '{word}' - will ask again next sync")
-        if any(res == "anki" for _, res in conflicts_resolved):
-            save_dictionary(dictionary, dict_path)
-
-    if state_dirty:
-        save_sync_state(dict_path, sync_state)
 
     out(f"{len(shared) - len(conflicts)} shared word(s) confirmed in sync.")
 
@@ -350,6 +377,7 @@ def run(dict_path, deck=None, tag=None, url="http://127.0.0.1:8765", do_web_sync
         "notes_pushed": notes_pushed,
         "notes_pulled": notes_pulled,
         "conflicts": conflicts,
+        "conflict_details": conflict_details,
         "conflicts_resolved": conflicts_resolved,
     }
 
