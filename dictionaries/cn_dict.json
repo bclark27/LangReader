@@ -39,6 +39,10 @@
     "level": 1,
     "notes": "shàng​bān - go to work"
   },
+  "下": {
+    "level": 3,
+    "notes": "xià - under, below, down"
+  },
   "下午": {
     "level": 2,
     "notes": "Xiàwǔ - afternoon"
@@ -375,6 +379,10 @@
     "level": 3,
     "notes": "Nǚhái - girl"
   },
+  "奶奶": {
+    "level": 1,
+    "notes": "nǎi​nai - (informal) grandma"
+  },
   "她": {
     "level": 3,
     "notes": "tā - she"
@@ -543,13 +551,17 @@
     "level": 3,
     "notes": "xīn - new, recent"
   },
+  "新闻": {
+    "level": 1,
+    "notes": "xīn​wén - news"
+  },
   "日常": {
     "level": 1,
     "notes": "rì cháng - daily / every-day / day-to-day"
   },
   "早上": {
     "level": 2,
-    "notes": "Zǎo shang - early morning"
+    "notes": "Zǎo shǎng - early morning"
   },
   "时": {
     "level": 3,
@@ -763,6 +775,10 @@
     "level": 3,
     "notes": "Piào - ticket"
   },
+  "突然": {
+    "level": 1,
+    "notes": "tū​rán - sudden; abrupt; unexpected"
+  },
   "窗户": {
     "level": 1,
     "notes": "Chuānghù - window"
@@ -863,6 +879,10 @@
     "level": 1,
     "notes": "Qǐchuáng - get up, wake up"
   },
+  "越": {
+    "level": 1,
+    "notes": "yuè - exceed, go beyond; the more ..."
+  },
   "跑": {
     "level": 1,
     "notes": "pǎo / páo - run, in a hurry"
@@ -919,6 +939,10 @@
     "level": 1,
     "notes": "Nà'er - there"
   },
+  "那里": {
+    "level": 3,
+    "notes": "nà​li - there, that place"
+  },
   "都": {
     "level": 1,
     "notes": "dōu - all / both / entirely"
@@ -964,7 +988,7 @@
     "notes": "Yīnyuè - music"
   },
   "风": {
-    "level": 1,
+    "level": 2,
     "notes": "fēng - wind, air"
   },
   "饭": {

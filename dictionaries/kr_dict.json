@@ -39,6 +39,10 @@
     "level": 1,
     "notes": "interest , attention, concern"
   },
+  "굉장히": {
+    "level": 1,
+    "notes": "so, very, extremely, immensely"
+  },
   "교육": {
     "level": 1,
     "notes": "education, training"
@@ -47,9 +51,17 @@
     "level": 1,
     "notes": "exchange, swap, interchange"
   },
+  "기간": {
+    "level": 1,
+    "notes": "period (of time)"
+  },
   "기기": {
     "level": 1,
     "notes": "device, equipment, instrument"
+  },
+  "기대": {
+    "level": 1,
+    "notes": "expectation, anticipation,  expect, anticipate"
   },
   "기술": {
     "level": 1,
@@ -78,6 +90,10 @@
   "기한": {
     "level": 1,
     "notes": "deadline"
+  },
+  "기회": {
+    "level": 1,
+    "notes": "opportunity, chance"
   },
   "납부": {
     "level": 1,
@@ -119,6 +135,10 @@
     "level": 3,
     "notes": "president"
   },
+  "대학원생": {
+    "level": 1,
+    "notes": "graduate student"
+  },
   "도서": {
     "level": 3,
     "notes": "book"
@@ -135,9 +155,17 @@
     "level": 4,
     "notes": "like this, up to this amount, this much"
   },
+  "맞춰": {
+    "level": 2,
+    "notes": "set, adjust"
+  },
   "며칠": {
     "level": 1,
     "notes": "a few days, several days"
+  },
+  "면담": {
+    "level": 1,
+    "notes": "face-to-face talk, meeting"
   },
   "무료": {
     "level": 4,
@@ -219,9 +247,17 @@
     "level": 1,
     "notes": "part, component"
   },
+  "분위기": {
+    "level": 1,
+    "notes": "atmosphere, mood, air, ambience"
+  },
   "비교": {
     "level": 1,
     "notes": "comparison, [동사] compare, make[draw] a comparison (between)"
+  },
+  "비상시": {
+    "level": 2,
+    "notes": "emergency"
   },
   "빌리다": {
     "level": 1,
@@ -239,6 +275,10 @@
     "level": 5,
     "notes": "picture"
   },
+  "상당히": {
+    "level": 1,
+    "notes": "considerably, quite, rather"
+  },
   "상황": {
     "level": 1,
     "notes": "situation, conditions, circumstance"
@@ -250,6 +290,10 @@
   "생산": {
     "level": 1,
     "notes": "production, produce, manufacture"
+  },
+  "생활": {
+    "level": 1,
+    "notes": "life, living, livelihood"
   },
   "설거지": {
     "level": 1,
@@ -311,6 +355,10 @@
     "level": 1,
     "notes": "application form"
   },
+  "실제로": {
+    "level": 1,
+    "notes": "really, actually, in reality (사실)"
+  },
   "실행": {
     "level": 1,
     "notes": "practice, action, carry out, implement"
@@ -323,6 +371,10 @@
     "level": 3,
     "notes": "information, guidance"
   },
+  "약간": {
+    "level": 1,
+    "notes": "a little, a bit, somewhat, slightly"
+  },
   "약속": {
     "level": 4,
     "notes": "promis, plan"
@@ -334,6 +386,10 @@
   "여러": {
     "level": 3,
     "notes": "many, various, several"
+  },
+  "여전히": {
+    "level": 4,
+    "notes": "still, as ever"
   },
   "열": {
     "level": 1,
@@ -382,6 +438,18 @@
   "인기": {
     "level": 1,
     "notes": "popular/public interest"
+  },
+  "일반": {
+    "level": 1,
+    "notes": "usual, common"
+  },
+  "일반적": {
+    "level": 1,
+    "notes": "general, usual, average"
+  },
+  "일반적으로": {
+    "level": 1,
+    "notes": "in general, usually"
   },
   "일정": {
     "level": 1,
@@ -475,9 +543,17 @@
     "level": 1,
     "notes": "investigation, inquiry"
   },
+  "졸업": {
+    "level": 1,
+    "notes": "graduate, graduation"
+  },
   "주의사항": {
     "level": 1,
     "notes": "caution"
+  },
+  "주제": {
+    "level": 1,
+    "notes": "topic"
   },
   "중국인": {
     "level": 5,
@@ -574,6 +650,10 @@
   "추천": {
     "level": 1,
     "notes": "suggestion"
+  },
+  "축제": {
+    "level": 1,
+    "notes": "festival"
   },
   "출신": {
     "level": 1,

@@ -28,11 +28,13 @@ produced/used by chinese_reader.py) and an Anki deck in sync:
     local, manual thing in the reader app. Updating a note's fields never
     touches its Anki review history/scheduling either way - that's a
     separate thing Anki tracks per-card, untouched by field edits.
-  - A word that already exists ANYWHERE in your Anki collection (not just
-    the target deck - e.g. left over from an earlier experiment, or added
-    to a different deck by hand) is left alone rather than pushed again.
-    Anki's own duplicate check works the same way by default, so this
-    also avoids "cannot create note because it is a duplicate" errors.
+  - Duplicate checking against Anki is scoped to the target deck, not your
+    whole collection - so the same word can exist as independent cards in
+    different decks (e.g. studying Mandarin and Cantonese, where a lot of
+    vocabulary shares the same written word but different pronunciation/
+    notes). Each deck gets its own copy with its own review schedule; a
+    word already sitting in a *different* deck won't block it from being
+    added here too.
   - If one word still fails to push for some reason, it's skipped with a
     clear message and the rest of the batch keeps going - one bad word
     can't stop everything else from syncing.
@@ -220,25 +222,21 @@ def run(dict_path, deck=None, tag=None, url="http://127.0.0.1:8765", do_web_sync
     dictionary = load_dictionary(dict_path)
     local_words = set(dictionary.keys())
 
-    # Two separate lookups on purpose:
-    #  - deck_words: only notes actually sitting in THIS deck. Used to
-    #    decide what to pull down, and what counts as "already synced".
-    #  - collection_words: notes of the same note type ANYWHERE in your
-    #    Anki collection. Anki's own duplicate check for addNote defaults
-    #    to this same scope (whole collection, same note type) rather than
-    #    "this deck only" - so we have to match it, or addNote will reject
-    #    words we thought were new with "cannot create note because it is
-    #    a duplicate" (e.g. a word that already exists in a different deck
-    #    from an earlier experiment, a manual add, or a renamed deck).
+    # Only checks THIS deck's notes - both for deciding what to push/pull,
+    # and (via duplicateScope below) for what Anki itself treats as a
+    # duplicate. This is deliberately deck-scoped rather than collection-
+    # wide: it lets the same word exist as independent cards in different
+    # decks, which matters if you study more than one language that shares
+    # some vocabulary (e.g. Mandarin and Cantonese sharing characters) -
+    # each deck gets its own copy with its own notes and its own review
+    # schedule, rather than the second language being silently blocked
+    # because the word "already exists" in the other one.
     deck_words_map = get_words_in_scope(url, f'deck:"{deck}" note:Basic')
-    collection_words_map = get_words_in_scope(url, "note:Basic")
     deck_words = set(deck_words_map.keys())
-    collection_words = set(collection_words_map.keys())
 
-    to_push = sorted(local_words - collection_words)
+    to_push = sorted(local_words - deck_words)
     to_pull = sorted(deck_words - local_words)
     shared = sorted(local_words & deck_words)
-    elsewhere = sorted((local_words & collection_words) - deck_words)
 
     pushed, push_failures = [], []
     for word in to_push:
@@ -251,23 +249,19 @@ def run(dict_path, deck=None, tag=None, url="http://127.0.0.1:8765", do_web_sync
                     "modelName": "Basic",
                     "fields": {"Front": word, "Back": text_to_html(entry["notes"])},
                     "tags": [tag],
+                    "options": {"duplicateScope": "deck"},
                 },
             )
             pushed.append(word)
         except Exception as e:
-            # One bad word (duplicate, weird characters, whatever) must
-            # not take the rest of the batch down with it.
+            # One bad word (weird characters, a genuine same-deck dupe we
+            # somehow missed, whatever) must not take the rest down with it.
             push_failures.append((word, str(e)))
     out(f"Pushed {len(pushed)} new word(s) to Anki" + (f": {', '.join(pushed)}" if pushed else ""))
     if push_failures:
         out(f"{len(push_failures)} word(s) could not be pushed and were skipped:")
         for word, err in push_failures:
             out(f"  - {word}: {err}")
-    if elsewhere:
-        out(
-            f"{len(elsewhere)} word(s) already exist elsewhere in your Anki collection "
-            f"(different deck) - left alone rather than duplicated: {', '.join(elsewhere)}"
-        )
 
     for word in to_pull:
         dictionary[word] = {"notes": deck_words_map[word]["back"], "level": DEFAULT_LEVEL}
@@ -373,7 +367,6 @@ def run(dict_path, deck=None, tag=None, url="http://127.0.0.1:8765", do_web_sync
         "push_failures": push_failures,
         "pulled": to_pull,
         "shared": shared,
-        "elsewhere": elsewhere,
         "notes_pushed": notes_pushed,
         "notes_pulled": notes_pulled,
         "conflicts": conflicts,
